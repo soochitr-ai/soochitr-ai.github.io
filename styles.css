@@ -1,10 +1,9 @@
-/* Font Helvetica e stili base */
+/* Font e body */
 body {
   font-family: Helvetica, Arial, sans-serif;
-  line-height: 1.6;
   margin: 0;
   padding: 0;
-  background-color: #f8f8f8;
+  background: #f8f8f8;
   color: #333;
 }
 
@@ -14,16 +13,6 @@ header {
   padding: 2rem;
   background-color: #222;
   color: #fff;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2rem;
-}
-
-header p {
-  margin: 0.5rem 0 0 0;
-  font-size: 1.2rem;
 }
 
 /* Pulsante menu */
@@ -37,7 +26,7 @@ header p {
   border: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 1100; /* alto per stare sopra tutto */
   border-radius: 4px;
 }
 
@@ -45,23 +34,23 @@ header p {
 #side-menu {
   height: 100%;
   width: 0;
-  position: mobile;
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: #333;
+  background: #333;
   overflow-x: hidden;
   transition: 0.3s;
   padding-top: 60px;
-  z-index: 1000;
+  z-index: 1050;
 }
 
 #side-menu ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
 #side-menu ul li {
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   text-align: center;
 }
 
@@ -80,7 +69,7 @@ section {
   max-width: 800px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background-color: #fff;
+  background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
@@ -92,15 +81,12 @@ h2 {
 }
 
 ul {
-  list-style-type: disc;
   padding-left: 20px;
 }
 
 a {
   color: #0077cc;
-  text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }

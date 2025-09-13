@@ -6,13 +6,27 @@
   <title>Rajiv Soochit - Junior E-Commerce & Online Marketing Specialist</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-</body>
-</html>
-</nav>
+<body>
+
+  <!-- Pulsante menu -->
+  <button id="menu-btn">&#9776;</button>
+
+  <!-- Menu a scomparsa laterale -->
+  <nav id="side-menu">
+    <ul>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
   <header>
     <h1>Rajiv Soochit</h1>
     <p>Junior E-Commerce & Online Marketing Specialist</p>
   </header>
+
+  <!-- Sezioni -->
   <section id="about">
     <h2>About Me</h2>
     <p>Multilingual (DE | EN | IT | FR | ES) with experience in SEO, CRM, Shopify, and Performance Marketing.</p>
@@ -37,5 +51,19 @@
     <p>Email: <a href="mailto:soochitr@gmail.com">soochitr@gmail.com</a></p>
     <p>LinkedIn: <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank">linkedin.com/in/rajivsoochit</a></p>
   </section>
+
+  <!-- Script menu laterale -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const sideMenu = document.getElementById('side-menu');
+
+    menuBtn.addEventListener('click', () => {
+      if(sideMenu.style.width === '250px') {
+        sideMenu.style.width = '0';
+      } else {
+        sideMenu.style.width = '250px';
+      }
+    });
+  </script>
 </body>
 </html>

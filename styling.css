@@ -1,43 +1,67 @@
-/* Apply Helvetica font to the entire page */
+/* Apply Helvetica everywhere */
 body {
-  font-family: "Helvetica", "Helvetica", helvetica;
-  background-color: #f4f4f4; /* optional background */
-  color: #333;               /* default text color */
-  line-height: 1.6;          /* improves readability */
+  font-family: "Helvetica", "Arial", sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
   margin: 0;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background: #336666;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin: 0.5rem 0 1rem;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Sections */
+main {
   padding: 20px;
 }
 
-/* Main title (h1) styling */
-h1 {
-  font-family: "Helvetica", "Arial", sans-serif;
-  color: #336666;   /* your chosen color */
-  font-size: 2.5rem;
+section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  color: #336666;
   margin-bottom: 10px;
 }
 
-/* Section titles/subtitles (h2, h3) styling */
-h2, h3 {
-  font-family: "Helvetica", "Arial", sans-serif;
-  color: #336666;   /* your chosen color */
-  margin-top: 30px;
-  margin-bottom: 15px;
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #333;
+  color: white;
 }
 
-/* Paragraphs */
-p {
-  font-family: "Helvetica", "Arial", sans-serif;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-/* Links */
+/* Smooth hover transitions */
 a {
-  font-family: "Helvetica", "Arial", sans-serif;
-  color: #2980b9;
-  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: #ff6600;
 }

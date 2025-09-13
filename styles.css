@@ -45,7 +45,7 @@ header p {
 #side-menu {
   height: 100%;
   width: 0;
-  position: fixed;
+  position: mobile;
   top: 0;
   left: 0;
   background-color: #333;

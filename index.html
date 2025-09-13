@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rajiv Soochit - Junior E-Commerce & Online Marketing Specialist</title>
+  <title>Rajiv Soochit</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -52,20 +52,14 @@
     <p>LinkedIn: <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank">linkedin.com/in/rajivsoochit</a></p>
   </section>
 
-  <!-- Script per aprire/chiudere menu -->
+  <!-- Script menu -->
   <script>
     const menuBtn = document.getElementById('menu-btn');
     const sideMenu = document.getElementById('side-menu');
 
     menuBtn.addEventListener('click', () => {
-      if(sideMenu.style.width === '250px') {
-        sideMenu.style.width = '0';
-      } else {
-        sideMenu.style.width = '250px';
-      }
+      sideMenu.style.width = sideMenu.style.width === '250px' ? '0' : '250px';
     });
   </script>
-</body>
-</html>
 </body>
 </html>

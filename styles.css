@@ -26,27 +26,52 @@ header p {
   font-size: 1.2rem;
 }
 
-/* Navigazione */
-nav ul {
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-  padding: 0.5rem 0;
+/* Pulsante menu */
+#menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 1001;
+  border-radius: 4px;
+}
+
+/* Menu laterale */
+#side-menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-color: #333;
-  margin: 0;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+  z-index: 1000;
 }
 
-nav ul li {
-  margin: 0 1rem;
+#side-menu ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-nav ul li a {
+#side-menu ul li {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+#side-menu ul li a {
   color: #fff;
   text-decoration: none;
-  font-weight: bold;
+  font-size: 1.2rem;
 }
 
-nav ul li a:hover {
+#side-menu ul li a:hover {
   text-decoration: underline;
 }
 
@@ -78,18 +103,4 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-/* Pulsante menu in alto a sinistra */
-#menu-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 2rem;
-  background: #222;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  z-index: 1001;
-  border-radius: 4px;
 }

@@ -79,3 +79,51 @@ a {
 a:hover {
   text-decoration: underline;
 }
+/* Pulsante menu in alto a sinistra */
+#menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 1001;
+  border-radius: 4px;
+}
+
+/* Menu a scomparsa */
+#side-menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+  z-index: 1000;
+}
+
+#side-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#side-menu ul li {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+#side-menu ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+#side-menu ul li a:hover {
+  text-decoration: underline;
+}

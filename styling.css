@@ -1,6 +1,6 @@
 /* Apply Helvetica font to the entire page */
 body {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: "Helvetica", "Helvetica", helvetica;
   background-color: #f4f4f4; /* optional background */
   color: #333;               /* default text color */
   line-height: 1.6;          /* improves readability */

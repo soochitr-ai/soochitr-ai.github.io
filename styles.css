@@ -41,7 +41,7 @@ header {
   overflow-x: hidden;
   transition: width 0.3s ease;
   z-index: 1100;
-  padding-top: 0; /* distanza dall’alto per link */
+  padding-top: 50px; /* distanza dall’alto per link */
 }
 
 #side-menu ul {

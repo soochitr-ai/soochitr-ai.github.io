@@ -58,7 +58,7 @@ header {
   height: 100%;
   border-style:groove ;
   border-color: #336666;
-  width:0%; /* inizialmente chiuso */
+  width:400px; /* inizialmente chiuso */
   background: #222;
   overflow-x:hidden;
   transition: width 2.0s ease;

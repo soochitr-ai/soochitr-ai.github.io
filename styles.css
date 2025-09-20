@@ -65,7 +65,10 @@ header {
   z-index: 1100;
   padding-top: 50px; /* distanza dall’alto per link */
 }
-
+/* Open menu when checkbox is checked */
+#menu-toggle:checked + #menu-btn + #side-menu {
+  width: 250px;
+}
 #side-menu ul {
   list-style: none;
   padding: 50px;

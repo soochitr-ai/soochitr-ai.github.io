@@ -100,19 +100,21 @@ section {
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-/* Certificates section */
+/* ========================
+   Certificates section
+======================== */
 #certificates ul {
-  list-style: none;     /* remove bullets */
+  list-style: none;       /* remove bullets */
   padding: 0;
   margin: 0;
-  display: grid;        /* grid layout */
+  display: grid;          /* grid layout */
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;            /* spacing between boxes */
+  gap: 20px;              /* space between boxes */
 }
 
 #certificates li a {
-  display: block;       /* full box clickable */
-  padding: 15px;
+  display: block;         /* whole box is clickable */
+  padding: 15px 20px;
   background: #f9f9f9;
   border: 2px solid #ccc;
   border-radius: 8px;

@@ -120,5 +120,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       sideMenu.style.width = sideMenu.style.width === '250px' ? '0' : '250px';
     });
   </script>
+  <script>
+  // Select all Udemy certificate links
+  const udemyLinks = document.querySelectorAll('.udemy-link');
+
+  udemyLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'click_udemy', {
+        'event_category': 'courses',
+        'event_label': link.textContent.trim()  // use link text as label
+      });
+    });
+  });
+</script>
 </body>
 </html>

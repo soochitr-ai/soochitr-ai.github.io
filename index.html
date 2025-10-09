@@ -71,8 +71,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:soochitr@gmail.com">soochitr@gmail.com</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank">linkedin.com/in/rajivsoochit</a></p>
+    <p>Email: <a href="mailto:soochitr@gmail.com" onclick="gtag('event', 'click_email', {
+           'event_category': 'engagement',
+           'event_label': 'contact_section'
+       });">
+       soochitr@gmail.com
+    </a>
+    </p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank"
+            onclick="gtag('event', 'click_linkedin', {
+           'event_category': 'engagement',
+           'event_label': 'contact_section'
+       });">
+       linkedin.com/in/rajivsoochit
+    </a>
+    </p>
   </section><section id="certificates">
   <h2>My Udemy Certificates</h2>
   <ul>

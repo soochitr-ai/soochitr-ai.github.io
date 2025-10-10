@@ -5,56 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rajiv Soochit</title>
   <link rel="stylesheet" href="styles.css">
-  
-  <!-- Google Analytics -->
-  <script>
-  function initGA4() {
-    // dynamically add GA4 script
-    var gtagScript = document.createElement('script');
-    gtagScript.async = true;
-    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
-    document.head.appendChild(gtagScript);
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.gtag = gtag;
-
-    gtag('js', new Date());
-    gtag('config', 'G-RP9MX5E2LV');
-  }
-
-  // Check if user already accepted cookies
-  if (localStorage.getItem('cookiesAccepted') === 'true') {
-    initGA4(); // load GA4 immediately
-  }
-
-  // Show popup if consent not given
-  else {
-    document.getElementById('cookie-consent').style.display = 'block';
-    document.getElementById('accept-cookies').addEventListener('click', function() {
-      localStorage.setItem('cookiesAccepted', 'true');
-      document.getElementById('cookie-consent').style.display = 'none';
-      initGA4(); // load GA4 after consent
-    });
-  }
-</script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W64ZK2GH');</script>
-<!-- End Google Tag Manager -->
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W64ZK2GH');</script>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W64ZK2GH"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  <!-- Pulsante menu -->
+
+  <!-- Menu button -->
   <button id="menu-btn">&#9776;</button>
 
-  <!-- Menu laterale -->
+  <!-- Side menu -->
   <nav id="side-menu">
     <ul>
       <li><a href="#about">About Me</a></li>
@@ -67,16 +33,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Header -->
   <header>
     <h1>Rajiv Soochit</h1>
-    <p>Online Marketing, Analytics, (E)-Commerce & Performance
-</p>
+    <p>Online Marketing, Analytics, (E)-Commerce & Performance</p>
     <img src="Bewerbungsphoto.jpg" alt="img" style="width:200px; height:200px; border-radius:50%; object-fit:cover;">
-    
   </header>
 
-  <!-- Sezioni -->
+  <!-- Sections -->
   <section id="about">
     <h2>About Me</h2>
-    <p>Multilingual (DE | EN | IT | FR | ES) with experience in  CRM, Analytics, Content/SEO, Customer support and Performance Marketing.</p>
+    <p>Multilingual (DE | EN | IT | FR | ES) with experience in CRM, Analytics, Content/SEO, Customer support and Performance Marketing.</p>
   </section>
 
   <section id="skills">
@@ -86,100 +50,79 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li>CRM - Salesforce - Hubspot</li>
       <li>E-Mail Marketing & Shopify - HTML5 - CSS3</li>
       <li>Data Analytics - Excel & SQL</li>
-      <li>Customer support B2B & B2C </li>
+      <li>Customer support B2B & B2C</li>
       <li>Workflows - JIRA</li>
       <li>Customer Journey, Funneling & UX</li>
-      
     </ul>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:soochitr@gmail.com" onclick="gtag('event', 'click_email', {
-           'event_category': 'engagement',
-           'event_label': 'contact_section'
-       });">
-       soochitr@gmail.com
-    </a>
-    </p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank"
-            onclick="gtag('event', 'click_linkedin', {
-           'event_category': 'engagement',
-           'event_label': 'contact_section'
-       });">
-       linkedin.com/in/rajivsoochit
-    </a>
-    </p>
-  </section><section id="certificates">
-  <h2>My Udemy Certificates</h2>
-  <ul>
-    <li><a href="https://www.udemy.com/certificate/UC-4787bd58-f80a-422b-a187-7dc4196a472f/" target="_blank">
-      Basic SEO
-    </a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-d96e5d1c-73f9-4b13-8557-24f9255f8aa3/" target="_blank">
-      SAP Basics
-    </a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-0599eeed-df57-4ca6-95ae-421d0daf004a/" target="_blank">
-      Build a Shopify Store
-    </a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-ed620f84-73f7-4a06-976e-20fff8a00d38/" target="_blank">
-      Excel Basics
-    </a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-38e907c6-ba07-429c-a4a8-2c4d1df02437/" target="_blank">
-      Dynamic Excel Reports for Marketing Analytics
-    </a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-a0614c7b-c0b3-463c-b008-91d18b0e8218/" target="_blank">
-      MySQL for Beginners: A Complete Training for beginnners
-    </a></li>
-  </ul>
+    <p>Email: <a href="mailto:soochitr@gmail.com">soochitr@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank">linkedin.com/in/rajivsoochit</a></p>
+  </section>
 
-</section>
+  <section id="certificates">
+    <h2>My Udemy Certificates</h2>
+    <ul>
+      <li><a href="https://www.udemy.com/certificate/UC-4787bd58-f80a-422b-a187-7dc4196a472f/" target="_blank">Basic SEO</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-d96e5d1c-73f9-4b13-8557-24f9255f8aa3/" target="_blank">SAP Basics</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-0599eeed-df57-4ca6-95ae-421d0daf004a/" target="_blank">Build a Shopify Store</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-ed620f84-73f7-4a06-976e-20fff8a00d38/" target="_blank">Excel Basics</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-38e907c6-ba07-429c-a4a8-2c4d1df02437/" target="_blank">Dynamic Excel Reports for Marketing Analytics</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-a0614c7b-c0b3-463c-b008-91d18b0e8218/" target="_blank">MySQL for Beginners</a></li>
+    </ul>
+  </section>
 
-  <!-- Script menu -->
+  <!-- Footer -->
+  <footer style="margin-top:40px; text-align:center;">
+    <p><a href="privacy.html" target="_blank">Privacy Policy</a></p>
+  </footer>
+
+  <!-- Cookie Consent Popup -->
+  <div id="cookie-consent" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#333; color:#fff; padding:15px; text-align:center; z-index:9999; font-family:Arial, sans-serif;">
+    This website uses cookies for anonymous analytics. By clicking "Accept", you consent to the use of cookies. 
+    <a href="privacy.html" target="_blank" style="color:#4CAF50; text-decoration:underline;">Privacy Policy</a>.
+    <button id="accept-cookies" style="margin-left:10px; padding:5px 10px; background:#4CAF50; border:none; color:#fff; cursor:pointer;">Accept</button>
+  </div>
+
+  <!-- Scripts -->
   <script>
+    // Menu toggle
     const menuBtn = document.getElementById('menu-btn');
     const sideMenu = document.getElementById('side-menu');
-
     menuBtn.addEventListener('click', () => {
       sideMenu.style.width = sideMenu.style.width === '250px' ? '0' : '250px';
     });
-  </script>
-  <script>
-  // Select all Udemy certificate links
-  const udemyLinks = document.querySelectorAll('.udemy-link');
 
-  udemyLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      gtag('event', 'click_udemy', {
-        'event_category': 'courses',
-        'event_label': link.textContent.trim()  // use link text as label
+    // Cookie consent logic
+    function initGA4() {
+      var gtagScript = document.createElement('script');
+      gtagScript.async = true;
+      gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
+      document.head.appendChild(gtagScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+
+      gtag('js', new Date());
+      gtag('config', 'G-RP9MX5E2LV');
+    }
+
+    const consentDiv = document.getElementById('cookie-consent');
+    const acceptBtn = document.getElementById('accept-cookies');
+
+    if (localStorage.getItem('cookiesAccepted') === 'true') {
+      initGA4();
+    } else {
+      consentDiv.style.display = 'block';
+      acceptBtn.addEventListener('click', function() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        consentDiv.style.display = 'none';
+        initGA4();
       });
-    });
-  });
-</script>
-<footer style="margin-top: 40px; text-align: center;">
-  <p><a href="privacy.html" target="_blank">Privacy Policy</a></p>
-</footer>
-  <div id="cookie-consent" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#333; color:#fff; padding:15px; text-align:center; z-index:9999; font-family:Arial, sans-serif;">
-  This website uses cookies for anonymous analytics. By continuing to browse, you accept our <a href="privacy.html" target="_blank" style="color:#4CAF50; text-decoration:underline;">Privacy Policy</a>.
-  <button id="accept-cookies" style="margin-left:10px; padding:5px 10px; background:#4CAF50; border:none; color:#fff; cursor:pointer;">Accept</button>
-</div>
-  <script>
-  // Check if the user already accepted cookies
-  if (!localStorage.getItem('cookiesAccepted')) {
-    document.getElementById('cookie-consent').style.display = 'block';
-  }
-
-  // Handle button click
-  document.getElementById('accept-cookies').addEventListener('click', function() {
-    localStorage.setItem('cookiesAccepted', 'true'); // remember acceptance
-    document.getElementById('cookie-consent').style.display = 'none';
-  });
-</script>
-  <div id="cookie-consent" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#333; color:#fff; padding:15px; text-align:center; z-index:9999; font-family:Arial, sans-serif;">
-  This website uses cookies for anonymous analytics. By clicking "Accept", you consent to the use of cookies. 
-  <a href="privacy.html" target="_blank" style="color:#4CAF50; text-decoration:underline;">Privacy Policy</a>.
-  <button id="accept-cookies" style="margin-left:10px; padding:5px 10px; background:#4CAF50; border:none; color:#fff; cursor:pointer;">Accept</button>
-</div>
+    }
+  </script>
 </body>
 </html>

@@ -98,13 +98,7 @@
 
 <!-- Scripts -->
 <script>
-  // Menu toggle
-  const menuBtn = document.getElementById('menu-btn');
-  const sideMenu = document.getElementById('side-menu');
-  menuBtn.addEventListener('click', () => {
-    sideMenu.style.width = sideMenu.style.width === '250px' ? '0' : '250px';
-  });
-
+document.addEventListener('DOMContentLoaded', function() {
   // GA4 init function
   function initGA4() {
     const gtagScript = document.createElement('script');
@@ -120,7 +114,6 @@
     gtag('config', 'G-RP9MX5E2LV');
   }
 
-  // Cookie consent logic
   const consentDiv = document.getElementById('cookie-consent');
   const acceptBtn = document.getElementById('accept-cookies');
 
@@ -134,6 +127,7 @@
       initGA4();
     });
   }
+});
 </script>
 
 </body>

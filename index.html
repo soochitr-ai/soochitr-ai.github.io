@@ -25,13 +25,13 @@
 <header>
   <h1>Rajiv Soochit</h1>
   <p>Online Marketing, Analytics, (E)-Commerce & Performance</p>
-  <img src="Bewerbungsphoto.jpg" alt="img" style="width:200px; height:200px; border-radius:50%; object-fit:cover;">
+  <img src="Bewerbungsphoto.jpg" alt="Rajiv Soochit" style="width:200px; height:200px; border-radius:50%; object-fit:cover;">
 </header>
 
 <!-- Sections -->
 <section id="about">
   <h2>About Me</h2>
-  <p>Multilingual (DE | EN | IT | FR | ES) with experience in CRM, Analytics, Content/SEO, Customer support and Performance Marketing.</p>
+  <p>Multilingual (DE | EN | IT | FR | ES) with experience in CRM, Analytics, Content/SEO, Customer support, and Performance Marketing.</p>
 </section>
 
 <section id="skills">
@@ -84,6 +84,7 @@
 <!-- Scripts -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
   // Menu toggle
   const menuBtn = document.getElementById('menu-btn');
   const sideMenu = document.getElementById('side-menu');
@@ -112,11 +113,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Show banner or load GA4 based on previous choice
   const cookieChoice = localStorage.getItem('cookiesAccepted');
   if(cookieChoice === 'true') {
     initGA4();
   } else if(cookieChoice === 'false') {
-    // GA4 nicht laden
+    // do nothing
   } else {
     consentDiv.style.display = 'block';
   }
@@ -131,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('cookiesAccepted', 'false');
     consentDiv.style.display = 'none';
   });
+
 });
 </script>
 

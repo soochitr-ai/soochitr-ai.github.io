@@ -1,6 +1,8 @@
 /* Font e body */
 body {
-  font-family: Helvetica, Arial, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+  html {
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+}
   margin: 0;
   padding: 0;
   background: linear-gradient(180deg, #333 0%, #336666 100%);

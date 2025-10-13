@@ -104,6 +104,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const acceptBtn = document.getElementById('accept-cookies');
   const declineBtn = document.getElementById('decline-cookies');
 
+  // --- NEW: Check if user is owner ---
+  const isOwner = localStorage.getItem('isOwner') === 'true';
+
+  // Ask once if this device belongs to the site owner
+  if(localStorage.getItem('isOwner') === null) {
+    if(confirm("Sei il proprietario del sito? (Premi OK per non tracciare le tue visite in GA4)")) {
+      localStorage.setItem('isOwner', 'true');
+    } else {
+      localStorage.setItem('isOwner', 'false');
+    }
+  }
+
   function initGA4() {
     if (!window.gtag) {
       const gtagScript = document.createElement('script');
@@ -116,7 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
       window.gtag = gtag;
 
       gtag('js', new Date());
-      gtag('config', 'G-RP9MX5E2LV');
+
+      // --- Send traffic_type parameter if user is owner ---
+      if (isOwner) {
+        gtag('config', 'G-RP9MX5E2LV', { 'traffic_type': 'internal' });
+      } else {
+        gtag('config', 'G-RP9MX5E2LV');
+      }
     }
   }
 

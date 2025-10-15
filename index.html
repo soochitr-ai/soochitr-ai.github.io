@@ -130,6 +130,16 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const menuBtn = document.getElementById('menu-btn');
+  const sideMenu = document.getElementById('side-menu');
 
+  menuBtn.addEventListener('click', function() {
+    // Toggle a class that shows/hides the menu
+    sideMenu.classList.toggle('open');
+  });
+});
+</script>
 </body>
 </html>

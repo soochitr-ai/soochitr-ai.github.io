@@ -64,7 +64,7 @@ header {
 
 #side-menu ul {
   list-style: none;
-  padding: 80px;
+  padding: 0;
   margin: 0;
 }
 
@@ -100,7 +100,7 @@ header {
 /* ====== Certificates Section ====== */
 #certificates ul {
   list-style: none;
-  padding: 0;
+  padding: 80px;
   margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

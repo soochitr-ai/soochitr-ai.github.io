@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impressum / Legal Notice – Rajiv Soochit</title>
-  <link rel="stylesheet" href="styles.css">
   <style>
     body {
       font-family: Roboto, sans-serif;
       margin: 40px auto;
       max-width: 700px;
       line-height: 1.6;
+      background-color: #f9f9f9;
+      color: #222;
     }
     header, footer {
       text-align: center;
@@ -66,5 +67,54 @@
     <p><a href="index.html">← Back to Home</a></p>
   </footer>
 
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent" style="display:none; position:fixed; bottom:20px; left:20px; right:20px; background:#fff; border:1px solid #ccc; border-radius:10px; padding:15px; box-shadow:0 2px 6px rgba(0,0,0,0.2); font-family:sans-serif; z-index:9999;">
+    <p style="margin-bottom:10px;">This site uses cookies for anonymous analytics (Google Analytics 4). Do you accept?</p>
+    <button id="accept-cookies" style="background:#0073e6; color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer;">Accept</button>
+    <button id="decline-cookies" style="background:#ccc; color:black; border:none; padding:8px 15px; border-radius:5px; cursor:pointer;">Decline</button>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    const consentDiv = document.getElementById('cookie-consent');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const declineBtn = document.getElementById('decline-cookies');
+
+    function loadGA4() {
+      const gtagScript = document.createElement('script');
+      gtagScript.async = true;
+      gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
+      document.head.appendChild(gtagScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+
+      gtag('js', new Date());
+      gtag('config', 'G-RP9MX5E2LV');
+    }
+
+    const cookieChoice = localStorage.getItem('cookiesAccepted');
+
+    if (cookieChoice === 'true') {
+      loadGA4();
+    } else if (cookieChoice === null) {
+      consentDiv.style.display = 'block';
+    }
+
+    acceptBtn.addEventListener('click', function() {
+      localStorage.setItem('cookiesAccepted', 'true');
+      consentDiv.style.display = 'none';
+      loadGA4();
+    });
+
+    declineBtn.addEventListener('click', function() {
+      localStorage.setItem('cookiesAccepted', 'false');
+      consentDiv.style.display = 'none';
+    });
+
+  });
+  </script>
 </body>
 </html>

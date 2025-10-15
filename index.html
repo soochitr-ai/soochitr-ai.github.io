@@ -4,36 +4,132 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rajiv Soochit</title>
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- Google Tag Manager -->
-  <script>
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id=GTM-W64ZK2GH'+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-W64ZK2GH');
-  </script>
-  <!-- End Google Tag Manager -->
 
   <style>
-    body { font-family: Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding:0 20px; line-height:1.6; color:#222; background:#f9f9f9; }
-    h1,h2 { color:#333; border-bottom:2px solid #ccc; padding-bottom:10px; }
-    a { color:#0077cc; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    #side-menu { width:0; transition:0.3s; position:fixed; top:0; left:0; height:100%; background:#eee; padding-top:60px; z-index:999; overflow-x:hidden; }
-    #side-menu ul { list-style:none; padding:0; }
-    #side-menu ul li { padding:10px 20px; }
-    #menu-btn { position:fixed; top:20px; left:20px; z-index:1000; }
-    footer { margin-top:40px; text-align:center; font-size:0.9em; color:#666; }
+    /* Full page dark background */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #333; /* dark gray */
+      color: #eee; /* light text */
+      font-family: Roboto, sans-serif;
+    }
+
+    /* Centered content container */
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #444; /* slightly lighter dark for card */
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    /* Headers */
+    h1, h2 {
+      color: #fff;
+      border-bottom: 2px solid #666;
+      padding-bottom: 10px;
+    }
+
+    /* Links */
+    a {
+      color: #1e90ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Side menu */
+    #side-menu {
+      width: 0;
+      transition: 0.3s;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: #555;
+      padding-top: 60px;
+      z-index: 999;
+      overflow-x: hidden;
+    }
+    #side-menu ul {
+      list-style: none;
+      padding: 0;
+    }
+    #side-menu ul li {
+      padding: 10px 20px;
+    }
+
+    /* Menu button */
+    #menu-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      font-size: 24px;
+      background: #1e90ff;
+      color: #fff;
+      border: none;
+      padding: 10px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Images */
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+      width: 200px;
+      height: 200px;
+      display: block;
+      margin: 20px auto;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+
+    /* Sections */
+    section {
+      margin-top: 30px;
+    }
+
+    /* Cookie banner */
+    #cookie-consent {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #222;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      z-index: 9999;
+    }
+    #cookie-consent a {
+      color: #1e90ff;
+      text-decoration: underline;
+    }
+    #cookie-consent button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    #accept-cookies { background: #1e90ff; }
+    #decline-cookies { background: #f44336; }
   </style>
 </head>
 <body>
-
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W64ZK2GH"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End GTM (noscript) -->
 
 <!-- Menu button -->
 <button id="menu-btn">&#9776;</button>
@@ -50,71 +146,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
 </nav>
 
-<!-- Header -->
-<header>
-  <h1>Rajiv Soochit</h1>
-  <p>Online Marketing, Analytics, (E)-Commerce & Performance</p>
-  <img src="Bewerbungsphoto.jpg" alt="Rajiv Soochit" style="width:200px; height:200px; border-radius:50%; object-fit:cover;">
-</header>
+<div class="container">
+  <!-- Header -->
+  <header>
+    <h1>Rajiv Soochit</h1>
+    <p style="text-align:center;">Online Marketing, Analytics, (E)-Commerce & Performance</p>
+    <img src="Bewerbungsphoto.jpg" alt="Rajiv Soochit">
+  </header>
 
-<!-- Sections -->
-<section id="about">
-  <h2>About Me</h2>
-  <p>My name is Rajiv, born/raised in Italy and of Mauritian background. I have been living in Germany since 2019, developing my career from Sales (EDEKA & Decathlon) to Online Marketing, E-Commerce, Analytics and front-end web development.
-  I´m comfortable with tools like Salesforce, GA4, SQL, Excel, and more. Open to talk about interesting offers. Contact me via LinkedIn!</p>
-</section>
+  <!-- About -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>My name is Rajiv, born/raised in Italy and of Mauritian background. I have been living in Germany since 2019, developing my career from Sales (EDEKA & Decathlon) to Online Marketing, E-Commerce, Analytics and front-end web development. I´m comfortable with tools like Salesforce, GA4, SQL, Excel, and more. Open to talk about interesting offers. Contact me via LinkedIn!</p>
+  </section>
 
-<section id="skills">
-  <h2>Skills</h2>
-  <ul>
-    <li>Multilingual (DE | EN | IT | FR | ES)</li>
-    <li>SEO, Performance & Content - Google Analytics - Sistrix</li>
-    <li>CRM - Salesforce - Hubspot</li>
-    <li>E-Mail Marketing & Shopify - HTML5 - CSS3</li>
-    <li>Data Analytics - Excel & SQL</li>
-    <li>Customer support B2B & B2C</li>
-    <li>Workflows - JIRA</li>
-    <li>Customer Journey, Funneling & UX</li>
-  </ul>
-</section>
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>Multilingual (DE | EN | IT | FR | ES)</li>
+      <li>SEO, Performance & Content - Google Analytics - Sistrix</li>
+      <li>CRM - Salesforce - Hubspot</li>
+      <li>E-Mail Marketing & Shopify - HTML5 - CSS3</li>
+      <li>Data Analytics - Excel & SQL</li>
+      <li>Customer support B2B & B2C</li>
+      <li>Workflows - JIRA</li>
+      <li>Customer Journey, Funneling & UX</li>
+    </ul>
+  </section>
 
-<section id="certificates">
-  <h2>My Udemy Certificates</h2>
-  <ul>
-    <li><a href="https://www.udemy.com/certificate/UC-4787bd58-f80a-422b-a187-7dc4196a472f/" target="_blank">Basic SEO</a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-d96e5d1c-73f9-4b13-8557-24f9255f8aa3/" target="_blank">SAP Basics</a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-0599eeed-df57-4ca6-95ae-421d0daf004a/" target="_blank">Build a Shopify Store</a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-ed620f84-73f7-4a06-976e-20fff8a00d38/" target="_blank">Excel Basics</a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-38e907c6-ba07-429c-a4a8-2c4d1df02437/" target="_blank">Dynamic Excel Reports for Marketing Analytics</a></li>
-    <li><a href="https://www.udemy.com/certificate/UC-a0614c7b-c0b3-463c-b008-91d18b0e8218/" target="_blank">MySQL for Beginners</a></li>
-  </ul>
-</section>
+  <!-- Certificates -->
+  <section id="certificates">
+    <h2>My Udemy Certificates</h2>
+    <ul>
+      <li><a href="https://www.udemy.com/certificate/UC-4787bd58-f80a-422b-a187-7dc4196a472f/" target="_blank">Basic SEO</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-d96e5d1c-73f9-4b13-8557-24f9255f8aa3/" target="_blank">SAP Basics</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-0599eeed-df57-4ca6-95ae-421d0daf004a/" target="_blank">Build a Shopify Store</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-ed620f84-73f7-4a06-976e-20fff8a00d38/" target="_blank">Excel Basics</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-38e907c6-ba07-429c-a4a8-2c4d1df02437/" target="_blank">Dynamic Excel Reports for Marketing Analytics</a></li>
+      <li><a href="https://www.udemy.com/certificate/UC-a0614c7b-c0b3-463c-b008-91d18b0e8218/" target="_blank">MySQL for Beginners</a></li>
+    </ul>
+  </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:soochitr@gmail.com">soochitr@gmail.com</a></p>
-  <p>LinkedIn: <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank">linkedin.com/in/rajivsoochit</a></p>
-</section>
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:soochitr@gmail.com">soochitr@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank">linkedin.com/in/rajivsoochit</a></p>
+  </section>
 
-<!-- Footer -->
-<footer>
-  <p>
-    <a href="privacy.html" target="_blank">Privacy Policy</a> | 
-    <a href="impressum.html" target="_blank">Impressum</a>
-  </p>
-</footer>
-
-<!-- Cookie Consent Banner -->
-<div id="cookie-consent" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#333; color:#fff; padding:15px; text-align:center; z-index:9999;">
-  This website uses cookies for anonymous analytics. 
-  <a href="privacy.html" target="_blank" style="color:#4CAF50; text-decoration:underline;">Privacy Policy</a>.
-  <button id="accept-cookies" style="margin-left:10px; padding:5px 10px; background:#4CAF50; border:none; color:#fff; cursor:pointer;">Accept</button>
-  <button id="decline-cookies" style="margin-left:10px; padding:5px 10px; background:#f44336; border:none; color:#fff; cursor:pointer;">Decline</button>
+  <!-- Footer -->
+  <footer>
+    <p>
+      <a href="privacy.html" target="_blank">Privacy Policy</a> | 
+      <a href="impressum.html" target="_blank">Impressum</a>
+    </p>
+  </footer>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-
   // Menu toggle
   const menuBtn = document.getElementById('menu-btn');
   const sideMenu = document.getElementById('side-menu');
@@ -123,52 +213,6 @@ document.addEventListener('DOMContentLoaded', function() {
       sideMenu.style.width = sideMenu.style.width === '250px' ? '0' : '250px';
     });
   }
-
-  // Cookie consent
-  const consentDiv = document.getElementById('cookie-consent');
-  const acceptBtn = document.getElementById('accept-cookies');
-  const declineBtn = document.getElementById('decline-cookies');
-
-  function loadGA4() {
-    if(!window.gtag){
-      const gtagScript = document.createElement('script');
-      gtagScript.async = true;
-      gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
-      document.head.appendChild(gtagScript);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-
-      gtag('js', new Date());
-      gtag('config', 'G-RP9MX5E2LV');
-      console.log("GA4 loaded ✅");
-    }
-  }
-
-  const cookieChoice = localStorage.getItem('cookiesAccepted');
-  if(cookieChoice === 'true'){
-    loadGA4();
-  } else if(cookieChoice === null && consentDiv){
-    consentDiv.style.display = 'block';
-  }
-
-  if(acceptBtn){
-    acceptBtn.addEventListener('click', function(){
-      localStorage.setItem('cookiesAccepted','true');
-      if(consentDiv) consentDiv.style.display='none';
-      loadGA4();
-    });
-  }
-
-  if(declineBtn){
-    declineBtn.addEventListener('click', function(){
-      localStorage.setItem('cookiesAccepted','false');
-      if(consentDiv) consentDiv.style.display='none';
-    });
-  }
-
-});
 </script>
 
 </body>

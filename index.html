@@ -88,41 +88,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="cookie-consent" style="display:block; position:fixed; bottom:0; left:0; right:0; background:#333; color:#fff; padding:15px; text-align:center; z-index:9999;">
   This website uses cookies for anonymous analytics.
   <button id="accept-cookies" style="margin-left:10px; padding:5px 10px; background:#4CAF50; border:none; color:#fff; cursor:pointer;">Accept</button>
+  <button id="decline-cookies" style="margin-left:10px; padding:5px 10px; background:#f44336; border:none; color:#fff; cursor:pointer;">Decline</button>
 </div>
 
-<!-- Scripts -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Menu toggle
-    const menuBtn = document.getElementById('menu-btn');
-    const sideMenu = document.getElementById('side-menu');
-    menuBtn.addEventListener('click', () => {
-      sideMenu.style.width = sideMenu.style.width === '250px' ? '0' : '250px';
-    });
+document.addEventListener('DOMContentLoaded', function() {
+  const consentDiv = document.getElementById('cookie-consent');
+  const acceptBtn = document.getElementById('accept-cookies');
+  const declineBtn = document.getElementById('decline-cookies');
 
-    // Cookie banner logic
-    const consentDiv = document.getElementById('cookie-consent');
-    const acceptBtn = document.getElementById('accept-cookies');
+  // Accept cookies
+  acceptBtn.addEventListener('click', function() {
+    consentDiv.style.display = 'none';
 
-    acceptBtn.addEventListener('click', function() {
-      consentDiv.style.display = 'none';
+    // Initialize GA4 only after user accepts
+    if (!window.gtag) {
+      const gtagScript = document.createElement('script');
+      gtagScript.async = true;
+      gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
+      document.head.appendChild(gtagScript);
 
-      // Initialize GA4 only after user accepts
-      if (!window.gtag) {
-        const gtagScript = document.createElement('script');
-        gtagScript.async = true;
-        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
-        document.head.appendChild(gtagScript);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
 
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        window.gtag = gtag;
-
-        gtag('js', new Date());
-        gtag('config', 'G-RP9MX5E2LV');
-      }
-    });
+      gtag('js', new Date());
+      gtag('config', 'G-RP9MX5E2LV');
+    }
   });
+
+  // Decline cookies
+  declineBtn.addEventListener('click', function() {
+    consentDiv.style.display = 'none';
+    console.log("User declined cookies."); // Optional: tracking or behavior here
+    // Do not initialize GA4
+  });
+});
 </script>
 
 </body>

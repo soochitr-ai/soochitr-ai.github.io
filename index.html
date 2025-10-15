@@ -92,75 +92,59 @@ Open to talk about interesting offers. If you have any request, write to my inbo
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
-  // Menu toggle
+  // --- Menu Toggle ---
   const menuBtn = document.getElementById('menu-btn');
   const sideMenu = document.getElementById('side-menu');
-  menuBtn.addEventListener('click', () => {
-    sideMenu.style.width = sideMenu.style.width === '250px' ? '0' : '250px';
-  });
 
-  // Cookie Consent
+  if (menuBtn && sideMenu) {
+    menuBtn.addEventListener('click', () => {
+      sideMenu.style.width = sideMenu.style.width === '250px' ? '0' : '250px';
+    });
+  }
+
+  // --- Cookie Consent ---
   const consentDiv = document.getElementById('cookie-consent');
   const acceptBtn = document.getElementById('accept-cookies');
   const declineBtn = document.getElementById('decline-cookies');
 
-  // --- NEW: Check if user is owner ---
-  const isOwner = localStorage.getItem('isOwner') === 'true';
+  function loadGA4() {
+    const gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
+    document.head.appendChild(gtagScript);
 
-  // Ask once if this device belongs to the site owner
-  if(localStorage.getItem('isOwner') === null) {
-    if(confirm("Sei il proprietario del sito? (Premi OK per non tracciare le tue visite in GA4)")) {
-      localStorage.setItem('isOwner', 'true');
-    } else {
-      localStorage.setItem('isOwner', 'false');
-    }
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+
+    gtag('js', new Date());
+    gtag('config', 'G-RP9MX5E2LV');
   }
 
-  function initGA4() {
-    if (!window.gtag) {
-      const gtagScript = document.createElement('script');
-      gtagScript.async = true;
-      gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
-      document.head.appendChild(gtagScript);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-
-      gtag('js', new Date());
-
-      // --- Send traffic_type parameter if user is owner ---
-      if (isOwner) {
-        gtag('config', 'G-RP9MX5E2LV', { 'traffic_type': 'internal' });
-      } else {
-        gtag('config', 'G-RP9MX5E2LV');
-      }
-    }
-  }
-
-  // Show banner or load GA4 based on previous choice
   const cookieChoice = localStorage.getItem('cookiesAccepted');
-  if(cookieChoice === 'true') {
-    initGA4();
-  } else if(cookieChoice === 'false') {
-    // do nothing
-  } else {
+
+  if (cookieChoice === 'true') {
+    loadGA4();
+  } else if (cookieChoice === null && consentDiv) {
     consentDiv.style.display = 'block';
   }
 
-  acceptBtn.addEventListener('click', function() {
-    localStorage.setItem('cookiesAccepted', 'true');
-    consentDiv.style.display = 'none';
-    initGA4();
-  });
+  if (acceptBtn) {
+    acceptBtn.addEventListener('click', function() {
+      localStorage.setItem('cookiesAccepted', 'true');
+      if (consentDiv) consentDiv.style.display = 'none';
+      loadGA4();
+    });
+  }
 
-  declineBtn.addEventListener('click', function() {
-    localStorage.setItem('cookiesAccepted', 'false');
-    consentDiv.style.display = 'none';
-  });
+  if (declineBtn) {
+    declineBtn.addEventListener('click', function() {
+      localStorage.setItem('cookiesAccepted', 'false');
+      if (consentDiv) consentDiv.style.display = 'none';
+    });
+  }
 
 });
 </script>
-
 </body>
 </html>

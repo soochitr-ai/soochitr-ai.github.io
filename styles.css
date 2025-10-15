@@ -1,138 +1,76 @@
-/* Apply to html */
+/* Full page background */
 html {
-  font-family: Roboto, sans-serif;
-  margin: 0;
-  padding: 0;
+  background-color: #f0f0f0; /* light gray for entire page */
 }
 
-/* Apply to body */
+/* Centered content column */
 body {
-  background: linear-gradient(180deg, #333 0%, #336666 100%);
+  font-family: Roboto, sans-serif;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  line-height: 1.6;
+  color: #222;
+  background-color: #fff; /* white content box */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* subtle shadow for depth */
+  border-radius: 10px;
+}
+
+/* Headers */
+h1, h2 {
   color: #333;
-  margin: 0;
-  padding: 0;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
 }
 
-/* Titoli h2 */
-h2 {
-  color: #c3c3c3; /* colore visibile su sfondo chiaro */
-  margin-top: 0;
-  font-size: 1.8rem;
+/* Links */
+a {
+  color: #0077cc;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
-/* Header */
-header {
-  text-align: center;
-  padding: 2rem;
-  background-color: #222;
-  color: #336666;
-}
-
-/* immagine “fuori” dal Header */
-.profile-pic {
-  position: relative;   /* resta fissa nello schermo */
-  left: -50px;       /* esce un po’ fuori dallo schermo */
-  top: 50%;          /* centrata verticalmente */
-  transform: translateY(-50%); /* perfeziona il centraggio */
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;  /* tonda */
-  object-fit: cover;
-  border: 3px solid #333;
-}
-
-/* Pulsante menu */
-#menu-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 2rem;
-  background: #222;
-  color: #336666;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  z-index: 1101; /* sopra il menu */
-  border-radius: 4px;
-}
-
-/* Menu laterale */
+/* Side menu */
 #side-menu {
+  width: 0;
+  transition: 0.3s;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  border-style:groove ;
-  border-color: #336666;
-  width:0; /* inizialmente chiuso */
-  background: #222;
-  overflow-x:hidden;
-  transition: width 2.0s ease;
-  z-index: 1100;
-  padding-top: 50px; /* distanza dall’alto per link */
-}
-/* Open menu when checkbox is checked */
-#menu-toggle:checked + #menu-btn + #side-menu {
-  width: 250px;
+  background: #eee;
+  padding-top: 60px;
+  z-index: 999;
+  overflow-x: hidden;
 }
 #side-menu ul {
   list-style: none;
-  padding: 50px;
-  margin: 0px;
-}
-
-#side-menu ul li {
-  margin: 1rem 0;
-  text-align: left;
-  padding-left: 20px; /* mantiene link vicino al bordo */
-}
-
-#side-menu ul li a {
-  color: #336666;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-#side-menu ul li a:hover {
-  text-decoration: underline;
-}
-
-/* Sezioni */
-section {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-/* ========================
-   Certificates section
-======================== */
-#certificates ul {
-  list-style: none;       /* remove bullets */
   padding: 0;
-  margin: 0;
-  display: grid;          /* grid layout */
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;              /* space between boxes */
+}
+#side-menu ul li {
+  padding: 10px 20px;
 }
 
-#certificates li a {
-  display: block;         /* whole box is clickable */
-  padding: 15px 20px;
-  background: #f9f9f9;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: bold;
-  color: #333;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-#certificates li a:hover {
-  background: #336666;
+/* Menu button */
+#menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  font-size: 24px;
+  background: #0077cc;
   color: #fff;
-  border-color: #224444;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 5px;
+  cursor: pointer;
 }
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #666;

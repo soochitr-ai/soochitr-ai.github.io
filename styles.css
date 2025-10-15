@@ -1,9 +1,9 @@
 /* Full page background */
 html {
-  background-color: #333; /* light gray for entire page */
+  background-color: #f0f0f0; /* full-page light gray */
 }
 
-/* Centered content column */
+/* Centered content card */
 body {
   font-family: Roboto, sans-serif;
   max-width: 800px;
@@ -11,14 +11,14 @@ body {
   padding: 20px;
   line-height: 1.6;
   color: #333;
-  background-color: #fff; /* white content box */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* subtle shadow for depth */
+  background-color: #fff; /* white card */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   border-radius: 10px;
 }
 
 /* Headers */
 h1, h2 {
-  color: #333;
+  color: #222;
   border-bottom: 2px solid #ccc;
   padding-bottom: 10px;
 }
@@ -76,7 +76,7 @@ footer {
   color: #666;
 }
 
-/* Cookie consent banner */
+/* Cookie banner */
 #cookie-consent {
   display: none;
   position: fixed;
@@ -101,9 +101,5 @@ footer {
   cursor: pointer;
   border-radius: 4px;
 }
-#accept-cookies {
-  background: #4CAF50;
-}
-#decline-cookies {
-  background: #f44336;
-}
+#accept-cookies { background: #4CAF50; }
+#decline-cookies { background: #f44336; }

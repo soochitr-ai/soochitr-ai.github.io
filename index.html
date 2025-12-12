@@ -126,6 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+  <script>
+fetch('cookie-banner.html')
+  .then(r => r.text())
+  .then(html => document.body.insertAdjacentHTML('beforeend', html));
+</script>
 
 </body>
 </html>

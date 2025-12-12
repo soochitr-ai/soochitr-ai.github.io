@@ -5,19 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rajiv Soochit</title>
   <link rel="stylesheet" href="styles.css">
-
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W64ZK2GH');
-  </script>
 </head>
 <body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W64ZK2GH"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Menu button -->
 <button id="menu-btn">&#9776;</button>
@@ -25,7 +14,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Side menu -->
 <nav id="side-menu">
   <ul>
-   <li><a href="https://www.udemy.com/certificate/UC-4787bd58-f80a-422b-a187-7dc4196a472f/" target="_blank">Basic SEO</a></li>
+    <li><a href="https://www.udemy.com/certificate/UC-4787bd58-f80a-422b-a187-7dc4196a472f/" target="_blank">Basic SEO</a></li>
     <li><a href="https://www.udemy.com/certificate/UC-d96e5d1c-73f9-4b13-8557-24f9255f8aa3/" target="_blank">SAP Basics</a></li>
     <li><a href="https://www.udemy.com/certificate/UC-0599eeed-df57-4ca6-95ae-421d0daf004a/" target="_blank">Build a Shopify Store</a></li>
     <li><a href="https://www.udemy.com/certificate/UC-ed620f84-73f7-4a06-976e-20fff8a00d38/" target="_blank">Excel Basics</a></li>
@@ -44,10 +33,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Sections -->
 <section id="about">
   <h2>About Me</h2>
-  <p>My name is Rajiv, born/raised in Italy and of Mauritian background. I have been living in Germany since 2019, where I actively developed my career: 
-I started as a Sales assistant at EDEKA and Decathlon, while also perfecting my German. Then, over the last two years, I built myself strongly from Online Marketing/E-Commerce to Analytics and front-end web development.
-I´m comfortable with a spectrum of Tools like Salesforce, GA4, SQL, Excel, but even more to come.
-Open to talk about interesting offers. If you have any questions, write to my inbox (Linkedin)!</p>
+  <p>My name is Rajiv, born/raised in Italy and of Mauritian background. I have been living in Germany since 2019, where I actively developed my career: I started as a Sales assistant at EDEKA and Decathlon, while also perfecting my German. Then, over the last two years, I built myself strongly from Online Marketing/E-Commerce to Analytics and front-end web development. I'm comfortable with a spectrum of Tools like Salesforce, GA4, SQL, Excel, but even more to come. Open to talk about interesting offers. If you have any questions, write to my inbox (LinkedIn)!</p>
 </section>
 
 <section id="skills">
@@ -89,57 +75,57 @@ Open to talk about interesting offers. If you have any questions, write to my in
   </p>
 </footer>
 
-<!-- Cookie Consent Popup -->
+<!-- Cookie Consent -->
 <div id="cookie-consent" style="display:block; position:fixed; bottom:0; left:0; right:0; background:#333; color:#fff; padding:15px; text-align:center; z-index:9999;">
   This website uses cookies for anonymous analytics.
   <button id="accept-cookies" style="margin-left:10px; padding:5px 10px; background:#4CAF50; border:none; color:#fff; cursor:pointer;">Accept</button>
   <button id="decline-cookies" style="margin-left:10px; padding:5px 10px; background:#f44336; border:none; color:#fff; cursor:pointer;">Decline</button>
 </div>
 
+<!-- Scripts -->
 <script>
+// Cookie consent + GA4 loading
+
 document.addEventListener('DOMContentLoaded', function() {
   const consentDiv = document.getElementById('cookie-consent');
   const acceptBtn = document.getElementById('accept-cookies');
   const declineBtn = document.getElementById('decline-cookies');
 
-  // Accept cookies
   acceptBtn.addEventListener('click', function() {
     consentDiv.style.display = 'none';
 
-    // Initialize GA4 only after user accepts
-    if (!window.gtag) {
-      const gtagScript = document.createElement('script');
-      gtagScript.async = true;
-      gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
-      document.head.appendChild(gtagScript);
+    // Load GA4 only after consent
+    const gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-RP9MX5E2LV";
+    document.head.appendChild(gtagScript);
 
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    window.gtag = gtag;
 
-      gtag('js', new Date());
-      gtag('config', 'G-RP9MX5E2LV');
-    }
+    gtag('js', new Date());
+    gtag('config', 'G-RP9MX5E2LV');
   });
 
-  // Decline cookies
   declineBtn.addEventListener('click', function() {
     consentDiv.style.display = 'none';
-    console.log("User declined cookies."); // Optional: tracking or behavior here
-    // Do not initialize GA4
   });
 });
 </script>
+
 <script>
+// Side menu toggle
+
 document.addEventListener('DOMContentLoaded', function() {
   const menuBtn = document.getElementById('menu-btn');
   const sideMenu = document.getElementById('side-menu');
 
   menuBtn.addEventListener('click', function() {
-    // Toggle a class that shows/hides the menu
     sideMenu.classList.toggle('open');
   });
 });
 </script>
+
 </body>
 </html>

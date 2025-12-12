@@ -125,3 +125,40 @@ header {
   color: #fff;
   border-color: #224444;
 }
+/* Banner container più grande */
+#cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #222;
+  color: #fff;
+  padding: 25px; /* più spazio verticale */
+  font-size: 18px; /* testo più grande */
+  text-align: center;
+  z-index: 9999;
+}
+
+/* Pulsanti più grandi */
+#cookie-consent button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 0 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Pulsante accetta */
+#cookie-consent button#accept-cookies {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+}
+
+/* Pulsante rifiuta */
+#cookie-consent button#decline-cookies {
+  background: #f44336;
+  color: #fff;
+  border: none;
+}
+

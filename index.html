@@ -8,22 +8,34 @@
   <link rel="stylesheet" href="styles.css">
   <script defer src="https://cloud.umami.is" data-website-id="5041b92d-9031-46b9-9ce5-f84df74b7853"></script>
 
-  <!-- 1. Google Consent Mode: Inizializzazione segnali (PRIMA di ogni altra cosa) -->
+  <!-- 1. Google Consent Mode iniziale -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-
-    // Imposta lo stato iniziale come 'denied' per conformità GDPR/EEA
-    gtag('consent', 'default', {
+    // Imposta stato iniziale come 'denied' per GDPR
+    window.dataLayer.push({
+      'event': 'consent_default',
       'ad_storage': 'denied',
-      'ad_user_data': 'denied',
-      'ad_personalization': 'denied',
-      'analytics_storage': 'denied',
-      'wait_for_update': 500
+      'analytics_storage': 'denied'
     });
+  </script>
+
+  <!-- 2. Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX'); <!-- Sostituisci con il tuo GTM ID -->
   </script>
 </head>
 <body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
 
 <!-- Menu button -->
 <button id="menu-btn">☰</button>
@@ -89,8 +101,8 @@
 <!-- Footer -->
 <footer style="margin-top:40px; text-align:center;">
   <p>
-  <a href="privacy.html">Privacy Policy / Datenschutzerklärung</a>
-  <a href="impressum.html" target="_blank">Impressum</a>
+    <a href="privacy.html">Privacy Policy / Datenschutzerklärung</a>
+    <a href="impressum.html" target="_blank">Impressum</a>
   </p>
 </footer>
 
@@ -101,61 +113,36 @@
   <button id="decline-cookies" style="margin-left:10px; padding:5px 10px; background:#f44336; border:none; color:#fff; cursor:pointer;">Decline</button>
 </div>
 
-<!-- Logica Consent Mode + Caricamento GA4 -->
+<!-- Logica Consent Mode + Menu toggle -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const consentDiv = document.getElementById('cookie-consent');
   const acceptBtn = document.getElementById('accept-cookies');
   const declineBtn = document.getElementById('decline-cookies');
 
-  // Recupera scelta precedente
   const savedConsent = localStorage.getItem('cookieConsent');
 
   if (savedConsent === 'granted') {
-    loadGA4('granted');
+    dataLayer.push({event:'consent_update', ad_storage:'granted', analytics_storage:'granted'});
   } else if (savedConsent === 'denied') {
-    loadGA4('denied');
+    dataLayer.push({event:'consent_update', ad_storage:'denied', analytics_storage:'denied'});
   } else {
-    // Se non c'è scelta, mostra il banner
     consentDiv.style.display = 'block';
-  }
-
-  function loadGA4(status) {
-    if (status === 'granted') {
-      // Invia il segnale di UPDATE a Google per Consent Mode v2
-      gtag('consent', 'update', {
-        'ad_storage': 'granted',
-        'ad_user_data': 'granted',
-        'ad_personalization': 'granted',
-        'analytics_storage': 'granted'
-      });
-    }
-
-    // Carica dinamicamente lo script di Google Analytics 4
-    const gtagScript = document.createElement('script');
-    gtagScript.async = true;
-    gtagScript.src = "https://www.googletagmanager.com";
-    document.head.appendChild(gtagScript);
-
-    gtag('js', new Date());
-    gtag('config', 'G-RP9MX5E2LV');
   }
 
   acceptBtn.addEventListener('click', function() {
     consentDiv.style.display = 'none';
     localStorage.setItem('cookieConsent', 'granted');
-    loadGA4('granted');
+    dataLayer.push({event:'consent_update', ad_storage:'granted', analytics_storage:'granted'});
   });
 
   declineBtn.addEventListener('click', function() {
     consentDiv.style.display = 'none';
     localStorage.setItem('cookieConsent', 'denied');
-    loadGA4('denied');
+    dataLayer.push({event:'consent_update', ad_storage:'denied', analytics_storage:'denied'});
   });
-});
 
-// Menu laterale toggle
-document.addEventListener('DOMContentLoaded', function() {
+  // Menu toggle
   const menuBtn = document.getElementById('menu-btn');
   const sideMenu = document.getElementById('side-menu');
   menuBtn.addEventListener('click', function() {

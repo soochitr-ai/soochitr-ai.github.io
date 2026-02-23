@@ -45,7 +45,7 @@ header {
 #side-menu {
   position: fixed;
   top: 0px;
-  left: -150px;          /* hidden offscreen */
+  left: -250px;          /* hidden offscreen */
   width: 250px;
   height: 100%;
   background-color: #222;

@@ -51,7 +51,7 @@ header {
   background-color: #222;
   color: #fff;
   padding-top: 0;           /* evita testo sporgente */
-  padding-left: 20px;
+  padding-left: 80px;
   overflow-y: auto;         /* scroll verticale se serve */
   transition: left 0.3s ease; /* più fluida */
   z-index: 1000;

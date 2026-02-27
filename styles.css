@@ -161,4 +161,32 @@ header {
   color: #fff;
   border: none;
 }
+/* Stile per il contact form */
+#contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
 
+#contact input,
+#contact textarea {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#contact button {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#contact button:hover {
+  opacity: 0.85;
+}

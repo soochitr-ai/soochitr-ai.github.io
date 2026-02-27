@@ -6,7 +6,13 @@ body {
   background: linear-gradient(180deg, #333 0%, #336666 100%);
   color: #333;
 }
-
+/* ====== Images ====== */
+img {
+  max-width: 100%;   /* non esce mai dal contenitore */
+  height: auto;      /* mantiene proporzioni */
+  display: block;
+  margin: 0 auto 20px auto; /* centra e mette spazio sotto */
+}
 /* Headings */
 h2 {
   color: #c3c3c3;

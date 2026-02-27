@@ -44,22 +44,22 @@ header {
 /* ====== Sidebar ====== */
 #side-menu {
   position: fixed;
-  top: 0px;
-  left: -250px;          /* hidden offscreen */
+  top: 0;
+  left: -260px;            /* completamente fuori dallo schermo */
   width: 250px;
   height: 100%;
   background-color: #222;
   color: #fff;
-  padding-top: 90px;
+  padding-top: 0;           /* evita testo sporgente */
   padding-left: 20px;
-  overflow-x: hidden;
-  transition: left 2.0s ease;
+  overflow-y: auto;         /* scroll verticale se serve */
+  transition: left 0.3s ease; /* più fluida */
   z-index: 1000;
   border-right: 2px groove #336666;
 }
 
 #side-menu.open {
-  left: 0;               /* slides in */
+  left: 0;                 /* menu visibile */
 }
 
 #side-menu ul {
@@ -73,8 +73,8 @@ header {
 }
 
 #side-menu ul li a {
-  color: #336666;
-  text-decoration: none ;
+  color: #fff;             /* bianco, invisibile quando menu chiuso */
+  text-decoration: none;
   font-size: 1.2rem;
 }
 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoL Data Analysis | Rajiv Soochit</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>League of Legends Project</h1>
+    <p>Data analysis on ranked matches: which factors lead to victory?</p>
+  </header>
+
+  <section id="overview">
+    <h2>Project Overview</h2>
+    <p>This project collects data from the Riot Games API, stores it in MySQL, and analyzes which metrics correlate with winning games. Metrics include Kills, Deaths, Assists, CS, Gold Earned, and more.</p>
+  </section>
+
+  <section id="table">
+    <h2>Sample Data Table</h2>
+    <img src="lol_table_screenshot.png" alt="Sample MySQL table screenshot" style="width:80%; max-width:800px;">
+    <p>Screenshot of the raw data stored in MySQL.</p>
+  </section>
+
+  <section id="charts">
+    <h2>Win Factors Analysis</h2>
+    <img src="lol_win_boxplot.png" alt="Win factors boxplot" style="width:80%; max-width:800px;">
+    <p>The boxplot above shows how key metrics (Kills, Deaths, Assists, CS, Gold) differ between winning and losing matches.</p>
+  </section>
+
+  <section id="tech">
+    <h2>Technologies Used</h2>
+    <ul>
+      <li>Python (requests, pandas, matplotlib)</li>
+      <li>MySQL for data storage</li>
+      <li>Riot Games API for match data</li>
+      <li>GitHub Pages for hosting</li>
+    </ul>
+  </section>
+
+  <section id="code-snippet">
+    <h2>Python Snippet</h2>
+    <pre>
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read data from MySQL
+# df = pd.read_sql(query, conn)
+
+# Generate boxplot
+df.boxplot(column='kills', by='win')
+plt.show()
+    </pre>
+  </section>
+
+  <section id="back">
+    <a href="index.html">← Back to main portfolio</a>
+  </section>
+
+</body>
+</html>

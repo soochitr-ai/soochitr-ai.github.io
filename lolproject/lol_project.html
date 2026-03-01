@@ -1,22 +1,257 @@
-import pandas as pd
-import mysql.connector
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LoL Data Analysis project by Rajiv Soochit. Using Riot Games API and MySQL, this project identifies key performance metrics that lead to wins, demonstrating transferable analytical skills for business and marketing.">
+  <meta name="author" content="Rajiv Soochit">
+  <link rel="canonical" href="https://soochitr-ai.github.io/lolproject/lol_project.html">
+  <title>LoL Data Analysis | Rajiv Soochit</title>
+  <link rel="stylesheet" href="../styles.css">
 
-conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="YOUR_PASSWORD",
-    database="lol_test"
-)
+  <!-- Google Tag Manager (head) -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W64ZK2GH');
+  </script>
 
-df = pd.read_sql("SELECT * FROM ranked_matches", conn)
+  <!-- Lightbox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+</head>
+<body>
 
-# Select only numeric columns
-df_numeric = df.select_dtypes(include='number')
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W64ZK2GH"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
 
-# Correlation with win
-print("=== CORRELATION ===")
-print(df_numeric.corr()['win'].sort_values(ascending=False))
+  <header>
+    <h1>League of Legends, MySQL & Python Project</h1>
+    <p>Data analysis on ranked matches: which factors lead to victory?</p>
+  </header>
 
-# Average per win/loss
-print("\n=== AVG per WIN/LOSS ===")
-print(df.groupby('win')[['kills','deaths','assists','cs','gold_earned']].mean())s
+  <section id="overview">
+    <h2>Project Overview</h2>
+    <p>
+      This project analyzes ranked match data to identify which performance metrics 
+      most strongly influence game outcomes. Data is collected using Python 
+      (Riot Games API requests), stored in MySQL, and later processed for analysis 
+      and visualization.
+    </p>
+    <p>
+      Key variables include Kills, Deaths, Assists, CS, and Gold Earned. 
+      The objective is to translate in-game performance indicators into a 
+      data-driven attribution framework, highlighting which factors contribute 
+      most significantly to winning matches.
+    </p>
+  </section>
+
+  <section id="table">
+    <h2>Sample Data Table</h2>
+    <div class="image-row">
+      <a href="../images/LOL_Analysis_6.png" data-lightbox="lol-gallery" data-title="MySQL Workbench - ranked_matches table structure">
+        <img src="../images/LOL_Analysis_6.png" alt="MySQL Workbench screenshot showing ranked_matches table structure" 
+         style="max-width:100%; height:auto; display:block; margin:0 auto;">
+      </a>
+      <a href="../images/LOL_Analysis_5.png" data-lightbox="lol-gallery" data-title="MySQL Workbench - ranked_matches query results">
+        <img src="../images/LOL_Analysis_5.png" alt="MySQL Workbench screenshot showing ranked_matches query results" 
+         style="max-width:100%; height:auto; display:block; margin:0 auto;">
+      </a>
+    </div>
+    <p>Screenshot of the raw data stored in MySQL.</p>
+  </section>
+
+  <section id="charts">
+    <h2>Win Factors Analysis</h2>
+    <a href="../images/LOL_Analysis_7.png" data-lightbox="lol-gallery" data-title="Heatmap showing correlation between match statistics">
+      <img src="../images/LOL_Analysis_7.png" alt="Heatmap showing correlation between match statistics">
+    </a>
+    <a href="../images/LOL_Analysis_1.png" data-lightbox="lol-gallery" data-title="Boxplot comparing kills between wins and losses">
+      <img src="../images/LOL_Analysis_1.png" alt="Boxplot comparing kills between wins and losses">
+    </a>
+    <a href="../images/LOL_Analysis_2.png" data-lightbox="lol-gallery" data-title="Boxplot comparing deaths between wins and losses">
+      <img src="../images/LOL_Analysis_2.png" alt="Boxplot comparing deaths between wins and losses">
+    </a>
+    <a href="../images/LOL_Analysis_3.png" data-lightbox="lol-gallery" data-title="Boxplot comparing assists between wins and losses">
+      <img src="../images/LOL_Analysis_3.png" alt="Boxplot comparing assists between wins and losses">
+    </a>
+    <a href="../images/LOL_Analysis_4.png" data-lightbox="lol-gallery" data-title="Boxplot comparing CS and gold between wins and losses">
+      <img src="../images/LOL_Analysis_4.png" alt="Boxplot comparing CS and gold between wins and losses">
+    </a>
+    <p>The boxplots above show how key metrics (Kills, Deaths, Assists, CS, Gold) differ between winning and losing matches.</p>
+
+    <!-- Interactive Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <div style="margin-top:40px;">
+      <h3>Interactive Summary</h3>
+
+      <!-- KPI boxes -->
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:20px 0;">
+        <div style="background:#0D2139; border:1px solid #1E3A5F; border-bottom:2px solid #4FC3A1; padding:16px; text-align:center; border-radius:4px;">
+          <div style="font-size:1.6rem; font-weight:700; color:#4FC3A1;">+0.69</div>
+          <div style="font-size:0.75rem; color:#A0B4C8; text-transform:uppercase; letter-spacing:1px;">Towers</div>
+          <div style="font-size:0.7rem; color:#5a7a9a; margin-top:4px;">Top win predictor</div>
+        </div>
+        <div style="background:#0D2139; border:1px solid #1E3A5F; border-bottom:2px solid #4FC3A1; padding:16px; text-align:center; border-radius:4px;">
+          <div style="font-size:1.6rem; font-weight:700; color:#4FC3A1;">+0.49</div>
+          <div style="font-size:0.75rem; color:#A0B4C8; text-transform:uppercase; letter-spacing:1px;">Obj. Damage</div>
+          <div style="font-size:0.7rem; color:#5a7a9a; margin-top:4px;">Team-oriented</div>
+        </div>
+        <div style="background:#0D2139; border:1px solid #1E3A5F; border-bottom:2px solid #E55A6A; padding:16px; text-align:center; border-radius:4px;">
+          <div style="font-size:1.6rem; font-weight:700; color:#E55A6A;">−0.41</div>
+          <div style="font-size:0.75rem; color:#A0B4C8; text-transform:uppercase; letter-spacing:1px;">Deaths</div>
+          <div style="font-size:0.7rem; color:#5a7a9a; margin-top:4px;">Top loss predictor</div>
+        </div>
+        <div style="background:#0D2139; border:1px solid #1E3A5F; border-bottom:2px solid #C89B3C; padding:16px; text-align:center; border-radius:4px;">
+          <div style="font-size:1.6rem; font-weight:700; color:#C89B3C;">+0.04</div>
+          <div style="font-size:0.75rem; color:#A0B4C8; text-transform:uppercase; letter-spacing:1px;">CS Score</div>
+          <div style="font-size:0.7rem; color:#5a7a9a; margin-top:4px;">Weaker than expected</div>
+        </div>
+      </div>
+
+      <!-- Correlation Bar Chart -->
+      <div style="background:#0D2139; border:1px solid #1E3A5F; border-radius:4px; padding:24px; margin-bottom:20px;">
+        <p style="font-weight:700; color:#C89B3C; text-transform:uppercase; letter-spacing:2px; margin-bottom:4px;">Correlation with Victory</p>
+        <p style="font-size:0.8rem; color:#A0B4C8; margin-bottom:16px;">Pearson coefficient — positive = win factor, negative = loss factor</p>
+        <canvas id="corrChart" style="max-height:260px;"></canvas>
+      </div>
+
+      <!-- Kills & Deaths side by side -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div style="background:#0D2139; border:1px solid #1E3A5F; border-radius:4px; padding:24px;">
+          <p style="font-weight:700; color:#C89B3C; text-transform:uppercase; letter-spacing:2px; margin-bottom:16px;">Avg Kills · Win vs Loss</p>
+          <canvas id="killsChart" style="max-height:220px;"></canvas>
+        </div>
+        <div style="background:#0D2139; border:1px solid #1E3A5F; border-radius:4px; padding:24px;">
+          <p style="font-weight:700; color:#C89B3C; text-transform:uppercase; letter-spacing:2px; margin-bottom:16px;">Avg Deaths · Win vs Loss</p>
+          <canvas id="deathsChart" style="max-height:220px;"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      Chart.defaults.color = '#A0B4C8';
+      Chart.defaults.font.family = 'inherit';
+      const grid = 'rgba(30,58,95,0.5)';
+
+      new Chart(document.getElementById('corrChart'), {
+        type: 'bar',
+        data: {
+          labels: ['Towers', 'Dragons', 'Obj. Damage', 'Barons', 'Assists', 'Kills', 'Deaths'],
+          datasets: [{
+            data: [0.69, 0.56, 0.49, 0.41, 0.20, 0.18, -0.41],
+            backgroundColor: ['#4FC3A1','#4FC3A1','#4FC3A1','#4FC3A1','#4FC3A1','#8BC4B4','#E55A6A'],
+            borderRadius: 2, borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: grid }, border: { color: grid } },
+            y: { grid: { color: grid }, border: { color: grid }, min: -0.6, max: 0.8,
+                 ticks: { callback: v => v > 0 ? '+'+v : v } }
+          }
+        }
+      });
+
+      new Chart(document.getElementById('killsChart'), {
+        type: 'bar',
+        data: {
+          labels: ['Loss', 'Win'],
+          datasets: [{ data: [8.01, 9.92], backgroundColor: ['#E55A6A','#4FC3A1'], borderRadius: 2 }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: grid }, border: { color: grid } },
+            y: { grid: { color: grid }, border: { color: grid }, beginAtZero: true }
+          }
+        }
+      });
+
+      new Chart(document.getElementById('deathsChart'), {
+        type: 'bar',
+        data: {
+          labels: ['Loss', 'Win'],
+          datasets: [{ data: [6.21, 3.57], backgroundColor: ['#E55A6A','#4FC3A1'], borderRadius: 2 }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: grid }, border: { color: grid } },
+            y: { grid: { color: grid }, border: { color: grid }, beginAtZero: true }
+          }
+        }
+      });
+    </script>
+  </section>
+
+  <section id="findings">
+    <h2>Key Findings</h2>
+    <p>
+      The analysis reveals that commonly assumed performance indicators do not always translate into victory. 
+      Kills and CS (creep score), often perceived as primary success metrics, show surprisingly weak predictive power.
+    </p>
+    <p>
+      Instead, the strongest predictors of victory are <strong>towers destroyed</strong> and <strong>dragons secured</strong> — 
+      both inherently team-oriented objectives — suggesting that coordinated, objective-focused play outweighs individual performance.
+      On the negative side, <strong>deaths</strong> is the single most significant factor associated with defeat, 
+      more so than any offensive metric.
+    </p>
+    <p>
+      This mirrors a fundamental principle applicable beyond gaming: <strong>individual output metrics</strong> (kills, CS) 
+      are less reliable performance indicators than <strong>process and collaboration metrics</strong> (objectives, assists). 
+      A framework built around the right KPIs leads to better outcomes than one optimized for vanity metrics.
+    </p>
+  </section>
+
+  <section id="business">
+    <h2>Business Transferability</h2>
+    <p>
+      This project demonstrates how performance drivers can be identified 
+      through structured data analysis. By comparing winning and losing outcomes, 
+      it is possible to isolate high-impact variables and reduce noise.
+    </p>
+    <p>
+      The same analytical framework can be applied in business environments:
+    </p>
+    <ul>
+      <li>Retail (Offline): Identifying which operational factors increase in-store sales performance.</li>
+      <li>E-commerce (Online): Determining which KPIs most strongly influence conversion rate and revenue.</li>
+      <li>Marketing: Evaluating attribution drivers and performance indicators across campaigns.</li>
+      <li>Operations: Measuring which variables impact productivity and output.</li>
+    </ul>
+  </section>
+
+  <section id="tech">
+    <h2>Technologies Used</h2>
+    <ul>
+      <li>Python (requests, pandas, matplotlib)</li>
+      <li>MySQL for data storage</li>
+      <li>Riot Games API for match data</li>
+      <li>GitHub Pages for hosting</li>
+    </ul>
+  </section>
+
+  <a href="../index.html" style="display:inline-block; margin: 20px 0;">← Back to Portfolio</a>
+
+  <footer>
+    <p style="font-size: 0.85em; color: gray;">
+      Data source: Riot Games API. This project isn't endorsed by Riot Games and doesn't 
+      reflect the views or opinions of Riot Games or anyone officially involved in 
+      producing or managing Riot Games properties. Riot Games, League of Legends, 
+      and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
+    </p>
+  </footer>
+
+</body>
+</html>

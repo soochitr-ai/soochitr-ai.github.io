@@ -72,12 +72,12 @@
   <section id="table">
     <h2>Sample Data Table</h2>
     <div class="image-row">
-      <a href="../images/LOL_Analysis_6.png" data-lightbox="lol-gallery" data-title="MySQL Workbench - ranked_matches table structure">
-        <img src="../images/LOL_Analysis_6.png" alt="MySQL Workbench screenshot showing ranked_matches table structure" 
+      <a href="../images/LOL_Analysis_6.png" data-lightbox="lol-gallery" data-title="MySQL Workbench — ranked_matches table structure showing columns: match_id, champion, kills, deaths, assists, cs, gold, objective_damage, towers, queue_type, patch_version, timestamp">
+        <img src="../images/LOL_Analysis_6.png" alt="MySQL Workbench: ranked_matches table structure with columns match_id, champion, kills, deaths, assists, cs, gold, objective_damage, towers, queue_type, patch_version, timestamp" 
          style="max-width:100%; height:auto; display:block; margin:0 auto;">
       </a>
-      <a href="../images/LOL_Analysis_5.png" data-lightbox="lol-gallery" data-title="MySQL Workbench - ranked_matches query results">
-        <img src="../images/LOL_Analysis_5.png" alt="MySQL Workbench screenshot showing ranked_matches query results" 
+      <a href="../images/LOL_Analysis_5.png" data-lightbox="lol-gallery" data-title="MySQL Workbench — ranked_matches query results: 286 rows of raw match data with numeric values for kills, deaths, assists, CS and gold per match">
+        <img src="../images/LOL_Analysis_5.png" alt="MySQL Workbench: ranked_matches query results showing 286 rows of raw match data with numeric values for kills, deaths, assists, CS and gold per match" 
          style="max-width:100%; height:auto; display:block; margin:0 auto;">
       </a>
     </div>
@@ -86,20 +86,74 @@
 
   <section id="charts">
     <h2>Win Factors Analysis</h2>
-    <a href="../images/LOL_Analysis_7.png" data-lightbox="lol-gallery" data-title="Heatmap showing correlation between match statistics">
-      <img src="../images/LOL_Analysis_7.png" alt="Heatmap showing correlation between match statistics">
+    <a href="../images/LOL_Analysis_7.png" data-lightbox="lol-gallery" data-title="Confusion Matrix and Feature Importance — logistic regression model predicting win/loss. Matrix: 21 true defeats, 29 true victories, 6 false positives, 5 false negatives (~82% accuracy). Feature Importance: damage_to_objectives and assists are the strongest win predictors; deaths is the strongest loss predictor.">
+      <img src="../images/LOL_Analysis_7.png" alt="Confusion Matrix and Feature Importance chart. The matrix shows 21 correctly predicted defeats, 29 correctly predicted victories, 6 false positives and 5 false negatives out of 61 matches (~82% accuracy). The Feature Importance bar chart shows damage_to_objectives (~1.65) and assists (~1.35) as the top win predictors, while deaths (~-1.5) is the strongest loss predictor. CS and damage_to_champs are near zero, indicating low predictive value.">
     </a>
-    <a href="../images/LOL_Analysis_1.png" data-lightbox="lol-gallery" data-title="Boxplot comparing kills between wins and losses">
-      <img src="../images/LOL_Analysis_1.png" alt="Boxplot comparing kills between wins and losses">
+
+    <!-- Confusion Matrix & Feature Importance description -->
+    <div style="background:#0D2139; border:1px solid #1E3A5F; border-radius:4px; padding:24px; margin-top:16px; margin-bottom:8px;">
+
+      <p style="font-weight:700; color:#C89B3C; text-transform:uppercase; letter-spacing:2px; margin-bottom:12px;">Reading the Confusion Matrix</p>
+      <p style="font-size:0.9rem; color:#A0B4C8; margin-bottom:12px;">
+        The model was evaluated on <strong style="color:#fff;">61 matches</strong> (test set).
+        <strong style="color:#4FC3A1;">21 defeats</strong> and <strong style="color:#4FC3A1;">29 victories</strong> were correctly predicted,
+        yielding an overall accuracy of <strong style="color:#4FC3A1;">~82%</strong>.
+        There were <strong style="color:#E55A6A;">6 false positives</strong> (defeats predicted as victories)
+        and <strong style="color:#E55A6A;">5 false negatives</strong> (victories predicted as defeats) —
+        a balanced error distribution, suggesting the model is not biased toward either outcome.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0;">
+        <div style="background:#0a1a2e; border:1px solid #1E3A5F; padding:12px; border-radius:4px; text-align:center;">
+          <div style="font-size:1.4rem; font-weight:700; color:#4FC3A1;">50 / 61</div>
+          <div style="font-size:0.75rem; color:#A0B4C8; text-transform:uppercase; letter-spacing:1px;">Correct predictions</div>
+        </div>
+        <div style="background:#0a1a2e; border:1px solid #1E3A5F; padding:12px; border-radius:4px; text-align:center;">
+          <div style="font-size:1.4rem; font-weight:700; color:#4FC3A1;">~82%</div>
+          <div style="font-size:0.75rem; color:#A0B4C8; text-transform:uppercase; letter-spacing:1px;">Accuracy</div>
+        </div>
+      </div>
+
+      <p style="font-weight:700; color:#C89B3C; text-transform:uppercase; letter-spacing:2px; margin:20px 0 12px;">Reading the Feature Importance</p>
+      <p style="font-size:0.9rem; color:#A0B4C8; margin-bottom:10px;">
+        The bar chart shows each feature's coefficient in the model
+        (<span style="color:#4FC3A1;">green = favors victory</span>,
+        <span style="color:#E55A6A;">red = favors defeat</span>).
+      </p>
+      <p style="font-size:0.9rem; color:#A0B4C8; margin-bottom:10px;">
+        <strong style="color:#4FC3A1;">Top victory drivers:</strong>
+        <strong>damage_to_objectives</strong> (~1.65) is the single strongest win predictor —
+        directly tied to tower and dragon priority.
+        <strong>Assists</strong> (~1.35) rank second, confirming that team-oriented play matters far more than solo output.
+        <strong>Wards placed</strong> and <strong>wards killed</strong> follow, highlighting that vision control
+        is a meaningful competitive differentiator.
+      </p>
+      <p style="font-size:0.9rem; color:#A0B4C8; margin-bottom:10px;">
+        <strong style="color:#E55A6A;">Top defeat drivers:</strong>
+        <strong>Deaths</strong> (~−1.5) is overwhelmingly the strongest negative feature —
+        dying costs gold, tempo, and map pressure simultaneously.
+        <strong>vision_score</strong> and <strong>gold_earned</strong> also appear negative,
+        likely reflecting a multicollinearity effect: in losing games, players farm more passively
+        without translating gold into objectives.
+      </p>
+      <p style="font-size:0.9rem; color:#A0B4C8;">
+        <strong>CS</strong> and <strong>damage_to_champs</strong> sit near zero —
+        reinforcing the core finding: individual combat and farming statistics
+        are poor predictors of match outcome compared to objective-focused teamplay.
+      </p>
+    </div>
+
+    <a href="../images/LOL_Analysis_1.png" data-lightbox="lol-gallery" data-title="Boxplot: kills distribution in wins vs losses — wins show a higher median (~10 kills) with a tighter distribution compared to losses (~8 kills)">
+      <img src="../images/LOL_Analysis_1.png" alt="Boxplot comparing kills between wins and losses: wins show a higher median of approximately 10 kills versus 8 in losses, with a tighter distribution in winning matches">
     </a>
-    <a href="../images/LOL_Analysis_2.png" data-lightbox="lol-gallery" data-title="Boxplot comparing deaths between wins and losses">
-      <img src="../images/LOL_Analysis_2.png" alt="Boxplot comparing deaths between wins and losses">
+    <a href="../images/LOL_Analysis_2.png" data-lightbox="lol-gallery" data-title="Boxplot: deaths distribution in wins vs losses — losses show nearly double the median deaths (6.2) compared to wins (3.6), the strongest negative predictor in the dataset">
+      <img src="../images/LOL_Analysis_2.png" alt="Boxplot comparing deaths between wins and losses: losses register a median of 6.2 deaths versus 3.6 in wins, making deaths the strongest negative predictor in the dataset">
     </a>
-    <a href="../images/LOL_Analysis_3.png" data-lightbox="lol-gallery" data-title="Boxplot comparing assists between wins and losses">
-      <img src="../images/LOL_Analysis_3.png" alt="Boxplot comparing assists between wins and losses">
+    <a href="../images/LOL_Analysis_3.png" data-lightbox="lol-gallery" data-title="Boxplot: assists distribution in wins vs losses — slight positive tendency in victories, reflecting the value of team-oriented play">
+      <img src="../images/LOL_Analysis_3.png" alt="Boxplot comparing assists between wins and losses: similar distributions with a slight positive tendency in victories, reflecting the value of team-oriented play">
     </a>
-    <a href="../images/LOL_Analysis_4.png" data-lightbox="lol-gallery" data-title="Boxplot comparing CS and gold between wins and losses">
-      <img src="../images/LOL_Analysis_4.png" alt="Boxplot comparing CS and gold between wins and losses">
+    <a href="../images/LOL_Analysis_4.png" data-lightbox="lol-gallery" data-title="Boxplot: CS and gold distribution in wins vs losses — modest differences confirm that individual farming has surprisingly low predictive impact on match outcome">
+      <img src="../images/LOL_Analysis_4.png" alt="Boxplot comparing CS and gold between wins and losses: modest differences between outcomes confirm that individual farming metrics have surprisingly low predictive impact on match result">
     </a>
     <p>The boxplots above show how key metrics (Kills, Deaths, Assists, CS, Gold) differ between winning and losing matches.</p>
 

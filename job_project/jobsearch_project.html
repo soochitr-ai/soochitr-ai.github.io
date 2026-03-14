@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Data-driven job search analysis: 321 applications, 44 interviews, conversion rate breakdown by role, sector and seniority level. Python, MySQL, Chart.js — Rajiv Soochit.">
+  <meta name="author" content="Rajiv Soochit">
+  <link rel="canonical" href="https://soochitr-ai.github.io/jobsearch/jobsearch_project.html">
+  <title>Job Search Analysis — 321 Applications, Data-Driven Insights | Rajiv Soochit</title>
+  <link rel="stylesheet" href="../styles.css">
+
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W64ZK2GH');
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* ── Project-level overrides ── */
+    :root {
+      --teal:   #336666;
+      --teal-lt:#4a9494;
+      --green:  #1D9E75;
+      --red:    #E24B4A;
+      --amber:  #BA7517;
+      --blue:   #378ADD;
+      --navy:   #0D1B4B;
+      --ice:    #CADCFC;
+      --muted:  #8FA8D4;
+      --bg:     #0f1d3a;
+      --card:   #132040;
+      --border: #1E3A5F;
+    }
+
+    body { background: linear-gradient(160deg, #1a2a1a 0%, #0d1f2d 50%, #0a1628 100%); }
+
+    header {
+      background: linear-gradient(135deg, #0d1f2d 0%, #0f2a1a 100%);
+      border-bottom: 3px solid var(--teal);
+      padding: 2.5rem 1rem;
+    }
+    header h1 { font-size: 1.7rem; color: var(--teal-lt); line-height: 1.3; }
+    header p  { color: #a0b4a0; }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: #d0ddd0;
+    }
+    section h2 { color: var(--teal-lt); }
+
+    /* ── Stat cards ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+      margin: 1.2rem 0;
+    }
+    .stat-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat-num  { font-size: 2rem; font-weight: 700; line-height: 1.1; }
+    .stat-label{ font-size: 0.78rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* ── Chart wrappers ── */
+    .chart-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin: 1.2rem 0;
+    }
+    .chart-box h3 {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 0.8rem;
+    }
+
+    /* ── Insight boxes ── */
+    .insight {
+      border-left: 3px solid var(--border);
+      padding: 0.75rem 1rem;
+      margin: 0.75rem 0;
+      background: rgba(255,255,255,0.03);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #b0c8b0;
+    }
+    .insight.green  { border-color: var(--green);  }
+    .insight.red    { border-color: var(--red);    }
+    .insight.amber  { border-color: var(--amber);  }
+    .insight.blue   { border-color: var(--blue);   }
+    .insight strong { color: #e0f0e0; }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .legend span { display: flex; align-items: center; gap: 5px; }
+    .ldot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+    /* ── 2x2 matrix ── */
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 1rem 0;
+    }
+    .q-card {
+      border-radius: 6px;
+      padding: 1rem;
+      font-size: 0.88rem;
+    }
+    .q-card .q-title { font-weight: 600; margin-bottom: 8px; }
+    .q-card .q-items { color: #b0c8b0; line-height: 1.8; }
+    .q-card .q-action { font-size: 0.78rem; font-weight: 600; margin-top: 8px; }
+
+    /* ── Funnel bars ── */
+    .funnel-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .funnel-label { font-size: 0.82rem; color: var(--muted); width: 160px; flex-shrink: 0; }
+    .funnel-track { flex: 1; background: #1a3070; border-radius: 4px; height: 28px; overflow: hidden; }
+    .funnel-fill  { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 10px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+    .funnel-pct   { font-size: 0.85rem; font-weight: 700; min-width: 44px; text-align: right; }
+
+    /* ── Note/warning box ── */
+    .note-box {
+      background: rgba(186,117,23,0.1);
+      border: 1px solid var(--amber);
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      font-size: 0.85rem;
+      color: #f0d090;
+      margin: 1rem 0;
+      line-height: 1.6;
+    }
+
+    /* ── Tech pills ── */
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.5rem; }
+    .pill {
+      background: rgba(51,102,102,0.25);
+      border: 1px solid var(--teal);
+      color: var(--teal-lt);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 600px) {
+      .matrix-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W64ZK2GH"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <header>
+    <h1>Job Search Analysis — Where Time Goes & Where to Invest It</h1>
+    <p>Data-driven breakdown of 321 applications, 44 interviews, and 19 final rounds — Munich, Jun 2025 – Mar 2026</p>
+  </header>
+
+  <!-- ── Overview ── -->
+  <section id="overview">
+    <h2>Project Overview</h2>
+    <p>
+      After tracking every job application in a structured spreadsheet over 9 months, 
+      I ran a full data analysis to understand where effort was well-spent and where 
+      it was systematically wasted. The dataset covers 321 applications across 
+      role categories, seniority levels, and company sectors — with conversion rates 
+      calculated for each dimension.
+    </p>
+    <p>
+      The methodology mirrors a standard marketing funnel analysis: impressions → 
+      click-through → qualified lead → conversion. Applied to job search, each stage 
+      reveals where the pipeline breaks — and what to fix.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--blue);">321</div>
+        <div class="stat-label">Applications sent</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--green);">44</div>
+        <div class="stat-label">Interviews</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--green);">13.7%</div>
+        <div class="stat-label">Overall CR</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--amber);">19</div>
+        <div class="stat-label">Final rounds</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--muted);">~12</div>
+        <div class="stat-label">Role categories</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--muted);">10</div>
+        <div class="stat-label">Company sectors</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Business context ── -->
+  <section id="context">
+    <h2>Business Applications of This Framework</h2>
+    <p>
+      The same analytical approach used here applies directly to any performance funnel 
+      in marketing or sales:
+    </p>
+    <ul>
+      <li><strong>Campaign attribution:</strong> which channels generate qualified leads vs vanity impressions</li>
+      <li><strong>CRM pipeline analysis:</strong> where deals stall — prospecting, demo, proposal, or close</li>
+      <li><strong>E-commerce conversion:</strong> identifying drop-off stages across the purchase funnel</li>
+      <li><strong>Resource allocation:</strong> reallocating budget from low-CR channels to high-CR ones</li>
+    </ul>
+    <p>
+      The core question is always the same: <strong>which inputs produce the best outputs per unit of effort?</strong>
+    </p>
+  </section>
+
+  <!-- ── Funnel ── -->
+  <section id="funnel">
+    <h2>The Application Funnel</h2>
+
+    <div class="funnel-row">
+      <div class="funnel-label">321 sent</div>
+      <div class="funnel-track"><div class="funnel-fill" style="width:100%;background:var(--blue);color:#042C53;">Applications sent</div></div>
+      <div class="funnel-pct" style="color:var(--blue);">100%</div>
+    </div>
+    <div class="funnel-row">
+      <div class="funnel-label">44 interviews</div>
+      <div class="funnel-track"><div class="funnel-fill" style="width:13.7%;background:var(--green);color:#04342C;">→</div></div>
+      <div class="funnel-pct" style="color:var(--green);">13.7%</div>
+    </div>
+    <div class="funnel-row">
+      <div class="funnel-label">19 final rounds</div>
+      <div class="funnel-track"><div class="funnel-fill" style="width:5.9%;background:var(--amber);color:#412402;">→</div></div>
+      <div class="funnel-pct" style="color:var(--amber);">5.9%</div>
+    </div>
+    <div class="funnel-row">
+      <div class="funnel-label">0 offers</div>
+      <div class="funnel-track"><div class="funnel-fill" style="width:0.4%;background:var(--red);">&nbsp;</div></div>
+      <div class="funnel-pct" style="color:var(--red);">0%</div>
+    </div>
+
+    <div class="note-box">
+      ⚠ The "0 offers" figure is a structural artifact, not a performance failure. The majority of applications were submitted while still in Ausbildung (IHK programme ending Feb 2026). Most companies require the qualification to be completed before making an offer. The real job search with a completed IHK started in March 2026 — 4 weeks before this analysis was run.
+    </div>
+
+    <div class="chart-box">
+      <h3>Status distribution — 321 applications</h3>
+      <div class="legend">
+        <span><span class="ldot" style="background:#E24B4A;"></span>Absage — direct rejection (49.2%)</span>
+        <span><span class="ldot" style="background:#378ADD;"></span>Beworben — still pending (22.7%)</span>
+        <span><span class="ldot" style="background:#888780;"></span>Keine Antwort — no response (14.3%)</span>
+        <span><span class="ldot" style="background:#BA7517;"></span>Absage nach Gespräch — final round (5.9%)</span>
+        <span><span class="ldot" style="background:#9FE1CB;"></span>Gespräch &lt;30min (5.0%)</span>
+        <span><span class="ldot" style="background:#1D9E75;"></span>Gespräch &gt;30min (2.8%)</span>
+      </div>
+      <div style="position:relative;height:80px;">
+        <canvas id="statusChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Level analysis ── -->
+  <section id="levels">
+    <h2>Conversion Rate by Seniority Level</h2>
+
+    <div class="chart-box">
+      <h3>Interview CR by level — ordered by performance</h3>
+      <div style="position:relative;height:170px;">
+        <canvas id="levelChart"></canvas>
+      </div>
+    </div>
+
+    <div class="insight green">
+      <strong>Trainee (35%, n=20):</strong> highest CR but very few positions exist in the German market for non-students. Not scalable.
+    </div>
+    <div class="insight red">
+      <strong>Junior (7.3%, n=82):</strong> worst category by CR. In Germany, "Junior" typically implies 1–2 years of direct experience. Competing here as a Berufseinsteiger was a structural disadvantage — not a skills issue.
+    </div>
+    <div class="insight blue">
+      <strong>Regular (14.4%, n=187):</strong> most efficient category by volume. These roles don't require prior experience in that exact title, which gives career-changers and Berufseinsteiger a fairer shot.
+    </div>
+  </section>
+
+  <!-- ── Role categories ── -->
+  <section id="categories">
+    <h2>Conversion Rate by Role Category</h2>
+
+    <div class="chart-box">
+      <h3>CR per category — all 12 categories, real counts from CSV</h3>
+      <div class="legend">
+        <span><span class="ldot" style="background:#1D9E75;"></span>&gt;20% CR — strong</span>
+        <span><span class="ldot" style="background:#378ADD;"></span>10–20% — average</span>
+        <span><span class="ldot" style="background:#BA7517;"></span>borderline</span>
+        <span><span class="ldot" style="background:#E24B4A;"></span>&lt;10% — weak</span>
+      </div>
+      <div style="position:relative;height:370px;">
+        <canvas id="catChart"></canvas>
+      </div>
+    </div>
+
+    <div class="insight red">
+      <strong>Performance / SEO (6.1%, n=33):</strong> 33 applications is a statistically reliable sample. The CR is definitively weak — these roles demand specialist portfolios (Google Ads certified with campaign management history, SEO tools at expert level). Stop applying here.
+    </div>
+    <div class="insight red">
+      <strong>Content / Social (6.2%, n=16):</strong> same story. These roles want content creators with portfolio-heavy social accounts, not analytics profiles.
+    </div>
+    <div class="insight green">
+      <strong>Analytics / Tracking (22.2%, n=9):</strong> small sample but highest efficiency per application. The GA4/GTM/Python stack is the differentiator — and competition is thin compared to 200+ applicants on generic roles.
+    </div>
+    <div class="insight amber">
+      <strong>CRM / Email (7.1%, n=14):</strong> surprisingly weak despite Salesforce experience. Likely explanation: these roles seek marketing automation tools (Klaviyo, Brevo, Mailchimp) rather than CRM Sales Cloud — a different category of tool.
+    </div>
+  </section>
+
+  <!-- ── Effort vs Return matrix ── -->
+  <section id="matrix">
+    <h2>Effort vs Return — The 2×2 Matrix</h2>
+    <p>
+      Plotting volume (applications sent) against conversion rate reveals four clear quadrants:
+    </p>
+
+    <div class="matrix-grid">
+      <div class="q-card" style="background:rgba(11,61,46,0.6);border:1.5px solid var(--green);">
+        <div class="q-title" style="color:var(--green);">🎯 Underexplored — invest more</div>
+        <div class="q-items">Analytics / Tracking<br>Customer Success<br>Trainee positions</div>
+        <div class="q-action" style="color:var(--green);">→ High CR, low volume. Scale up.</div>
+      </div>
+      <div class="q-card" style="background:rgba(42,31,10,0.6);border:1.5px solid var(--amber);">
+        <div class="q-title" style="color:var(--amber);">⚠ Test with max 5 apps</div>
+        <div class="q-items">CRM / Email Marketing<br>MarTech / Ops<br>E-Commerce</div>
+        <div class="q-action" style="color:var(--amber);">→ Unclear signal. Test carefully.</div>
+      </div>
+      <div class="q-card" style="background:rgba(11,42,74,0.6);border:1.5px solid var(--blue);">
+        <div class="q-title" style="color:var(--blue);">🚀 Sweet spot — maintain</div>
+        <div class="q-items">Sales / Vertrieb (n=33, 27%)<br>General Online Mktg (n=72, 14%)</div>
+        <div class="q-action" style="color:var(--blue);">→ High volume + decent CR. Keep going.</div>
+      </div>
+      <div class="q-card" style="background:rgba(42,10,10,0.6);border:1.5px solid var(--red);">
+        <div class="q-title" style="color:var(--red);">🚫 Stop immediately</div>
+        <div class="q-items">Performance / SEO (n=33, 6%)<br>Content / Social (n=16, 6%)<br>49 apps → only 3 interviews</div>
+        <div class="q-action" style="color:var(--red);">→ Worst ROI. Reallocate effort now.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Sector ── -->
+  <section id="sectors">
+    <h2>CR by Company Sector</h2>
+
+    <div class="note-box">
+      ⚠ Sector classification is directional only — 207 of 321 companies could not be reliably categorised from name alone. Treat CR figures for small samples (n&lt;10) as indicative, not definitive.
+    </div>
+
+    <div class="chart-box">
+      <h3>Reliable sample (n≥7) vs small sample (n&lt;7, shown faded)</h3>
+      <div style="position:relative;height:290px;">
+        <canvas id="sectorChart"></canvas>
+      </div>
+    </div>
+
+    <div class="insight green">
+      <strong>Finance / FinTech (21.1%, n=19):</strong> most reliable high-CR sector with a meaningful sample. Edenred led to a 50-minute interview. CRM and analytics skills translate directly to FinTech products. Underexplored.
+    </div>
+    <div class="insight blue">
+      <strong>Agencies & Marketing (14.3%, n=35):</strong> solid but not the outlier originally expected. Agencies value operational multi-tool profiles, but competition from graduates is fierce.
+    </div>
+  </section>
+
+  <!-- ── Key findings ── -->
+  <section id="findings">
+    <h2>Key Findings</h2>
+
+    <p>Three patterns emerge clearly from the data:</p>
+
+    <div class="insight green">
+      <strong>Finding 1 — The funnel breaks at the final step, not the CV.</strong> A 13.7% application-to-interview rate is above market average for a Berufseinsteiger in Munich. The issue is converting final rounds into offers — a problem of domain-specific experience depth, not profile quality.
+    </div>
+
+    <div class="insight red">
+      <strong>Finding 2 — Volume without targeting is inefficient.</strong> Performance/SEO and Content/Social absorbed 49 combined applications and produced only 3 interviews. That effort, redirected to Analytics and CS roles, would statistically have yielded 10–12 interviews instead.
+    </div>
+
+    <div class="insight amber">
+      <strong>Finding 3 — The dataset contains a structural bias.</strong> ~270 of 321 applications were submitted while still in Ausbildung. The completion of the IHK qualification (Feb 2026) removes the primary hiring blocker. The CR figures for the most recent 50 applications will diverge significantly once enough time has passed for outcomes to materialise.
+    </div>
+
+    <p>
+      This mirrors a principle applicable in any performance channel: <strong>measuring vanity metrics (applications sent) instead of quality-adjusted conversion rates leads to systematically wrong resource allocation decisions.</strong> The fix is not sending more applications — it is sending the right ones to the right segments.
+    </p>
+  </section>
+
+  <!-- ── Dataset ── -->
+  <section id="dataset">
+    <h2>Dataset Details</h2>
+    <ul>
+      <li><strong>Rows:</strong> 321 applications</li>
+      <li><strong>Period:</strong> June 2025 – March 2026</li>
+      <li><strong>Location:</strong> Munich, Germany (primarily) + remote roles</li>
+      <li><strong>Key fields:</strong> Firma, Stelle, Status, Beschreibung</li>
+      <li><strong>Status values:</strong> Beworben, Absage, Keine Antwort, Gespräch (&lt;30 / &gt;30 min), Absage nach Gespräch</li>
+      <li><strong>Categorisation:</strong> role categories and sectors derived via keyword classification in Python</li>
+      <li><strong>Limitation:</strong> 207/321 companies could not be reliably sector-classified from name alone — sector CR is directional only</li>
+    </ul>
+  </section>
+
+  <!-- ── Tech ── -->
+  <section id="tech">
+    <h2>Technologies Used</h2>
+    <div class="pill-row">
+      <span class="pill">Python</span>
+      <span class="pill">pandas</span>
+      <span class="pill">CSV / Excel</span>
+      <span class="pill">Chart.js</span>
+      <span class="pill">HTML5 / CSS3</span>
+      <span class="pill">GitHub Pages</span>
+    </div>
+    <p style="margin-top:1rem; font-size:0.9rem; color:#a0b4a0;">
+      Data was tracked in Excel, exported as UTF-8 CSV, classified with Python keyword matching, and visualised with Chart.js. No external BI tool required.
+    </p>
+  </section>
+
+  <a href="../index.html" style="display:inline-block;margin:20px 1.5rem;">← Back to Portfolio</a>
+
+  <footer style="margin-top:20px;text-align:center;padding:1rem;">
+    <p>
+      <a href="../datenschutz.html">Datenschutz</a> |
+      <a href="../privacy-policy.html">Privacy Policy</a> |
+      <a href="../impressum.html">Impressum</a>
+    </p>
+    <p style="font-size:0.8rem;color:#666;margin-top:8px;">
+      Data collected and analysed by Rajiv Soochit. No personal data from third parties was used.
+    </p>
+  </footer>
+
+  <script src="../cookie-consent.js"></script>
+
+  <script>
+    const grid  = 'rgba(30,58,95,0.4)';
+    const tick  = '#8FA8D4';
+    Chart.defaults.color = tick;
+    Chart.defaults.font.family = 'Helvetica, Arial, sans-serif';
+
+    // ── Status stacked bar ──
+    new Chart(document.getElementById('statusChart'), {
+      type: 'bar',
+      data: {
+        labels: [''],
+        datasets: [
+          { label: 'Absage',              data: [158], backgroundColor: '#E24B4A', barThickness: 40 },
+          { label: 'Beworben',            data: [73],  backgroundColor: '#378ADD', barThickness: 40 },
+          { label: 'Keine Antwort',       data: [46],  backgroundColor: '#888780', barThickness: 40 },
+          { label: 'Absage nach Gespräch',data: [19],  backgroundColor: '#BA7517', barThickness: 40 },
+          { label: 'Gespräch <30min',     data: [16],  backgroundColor: '#9FE1CB', barThickness: 40 },
+          { label: 'Gespräch >30min',     data: [9],   backgroundColor: '#1D9E75', barThickness: 40 },
+        ]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: {
+          label: ctx => ` ${ctx.dataset.label}: ${ctx.raw} (${Math.round(ctx.raw/321*100)}%)`
+        }}},
+        scales: {
+          x: { stacked: true, display: false, max: 321 },
+          y: { stacked: true, display: false }
+        }
+      }
+    });
+
+    // ── Level bar ──
+    new Chart(document.getElementById('levelChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Trainee  (n=20)', 'Regular  (n=187)', 'Praktikum  (n=32)', 'Junior  (n=82)'],
+        datasets: [{ data: [35.0, 14.4, 12.5, 7.3],
+          backgroundColor: ['#1D9E75','#378ADD','#9FE1CB','#E24B4A'],
+          borderRadius: 4, barThickness: 30 }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw}% CR` }}},
+        scales: {
+          x: { grid: { color: grid }, ticks: { color: tick, callback: v => v+'%' }, max: 45 },
+          y: { grid: { display: false }, ticks: { color: tick } }
+        }
+      }
+    });
+
+    // ── Category bar ──
+    const catLabels = [
+      'Trainee (n=13)', 'Sales / Vertrieb (n=33)', 'Analytics / Tracking (n=9)',
+      'Customer Success (n=24)', 'General Online Mktg (n=72)', 'Account Mgmt (n=17)',
+      'Other (n=63)', 'E-Commerce (n=22)', 'CRM / Email (n=14)',
+      'Content / Social (n=16)', 'Performance / SEO (n=33)', 'MarTech / Ops (n=5)'
+    ];
+    const catRates = [30.8, 27.3, 22.2, 20.8, 13.9, 11.8, 9.5, 9.1, 7.1, 6.2, 6.1, 0.0];
+    const catColors = catRates.map(r => r > 20 ? '#1D9E75' : r >= 10 ? '#378ADD' : r > 0 ? '#E24B4A' : '#888780');
+
+    new Chart(document.getElementById('catChart'), {
+      type: 'bar',
+      data: { labels: catLabels, datasets: [{ data: catRates, backgroundColor: catColors, borderRadius: 4, barThickness: 22 }] },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw}% CR` }}},
+        scales: {
+          x: { grid: { color: grid }, ticks: { color: tick, callback: v => v+'%' }, max: 38 },
+          y: { grid: { display: false }, ticks: { color: tick, font: { size: 11 } } }
+        }
+      }
+    });
+
+    // ── Sector bar ──
+    const secLabels = ['Finance/FinTech (n=19)','Tech/SaaS (n=22)','Automotive (n=11)','Agencies (n=35)','E-Comm/Retail (n=7)','Other/Mixed (n=207)','FMCG (n=3)','Healthcare (n=5)','Recruit/HR (n=5)','Telco (n=4)'];
+    const secRates  = [21.1, 18.2, 18.2, 14.3, 14.3, 10.1, 66.7, 40.0, 40.0, 0.0];
+    const secN      = [19,   22,   11,   35,   7,    207,  3,    5,    5,   4  ];
+    const secColors = secRates.map((r, i) => {
+      if (secN[i] < 7) return 'rgba(136,135,128,0.35)';
+      return r > 20 ? '#1D9E75' : r >= 12 ? '#378ADD' : r > 0 ? '#BA7517' : '#888780';
+    });
+
+    new Chart(document.getElementById('sectorChart'), {
+      type: 'bar',
+      data: { labels: secLabels, datasets: [{ data: secRates, backgroundColor: secColors, borderRadius: 4, barThickness: 22 }] },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: {
+          label: ctx => ` ${ctx.raw}% CR${secN[ctx.dataIndex] < 7 ? ' (small sample — high variance)' : ''}`
+        }}},
+        scales: {
+          x: { grid: { color: grid }, ticks: { color: tick, callback: v => v+'%' }, max: 80 },
+          y: { grid: { display: false }, ticks: { color: tick, font: { size: 11 } } }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

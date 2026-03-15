@@ -3,6 +3,18 @@
  * Shared cookie consent banner for all pages.
  * Usage (root pages):    <script src="cookie-consent.js"></script>
  * Usage (subfolders):    <script src="../cookie-consent.js"></script>
+ *
+ * Uses official Google Consent Mode API (gtag) instead of raw dataLayer push.
+ * Requires this block BEFORE the GTM snippet on every page:
+ *
+ *   <script>
+ *     window.dataLayer = window.dataLayer || [];
+ *     function gtag(){dataLayer.push(arguments);}
+ *     gtag('consent', 'default', {
+ *       'analytics_storage': 'denied',
+ *       'ad_storage': 'denied'
+ *     });
+ *   </script>
  */
 
 (function () {
@@ -48,14 +60,16 @@
     const acceptBtn  = document.getElementById('accept-cookies');
     const declineBtn = document.getElementById('decline-cookies');
 
+    // Ensure gtag is available (fallback safety)
     window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
 
     const savedConsent = localStorage.getItem('cookieConsent');
 
     if (savedConsent === 'granted') {
-      dataLayer.push({ event: 'consent_update', ad_storage: 'granted', analytics_storage: 'granted' });
+      gtag('consent', 'update', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
     } else if (savedConsent === 'denied') {
-      dataLayer.push({ event: 'consent_update', ad_storage: 'denied', analytics_storage: 'denied' });
+      gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
     } else {
       consentDiv.style.display = 'block';
     }
@@ -63,17 +77,16 @@
     acceptBtn.addEventListener('click', function () {
       consentDiv.style.display = 'none';
       localStorage.setItem('cookieConsent', 'granted');
-      dataLayer.push({ event: 'consent_update', ad_storage: 'granted', analytics_storage: 'granted' });
+      gtag('consent', 'update', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
     });
 
     declineBtn.addEventListener('click', function () {
       consentDiv.style.display = 'none';
       localStorage.setItem('cookieConsent', 'denied');
-      dataLayer.push({ event: 'consent_update', ad_storage: 'denied', analytics_storage: 'denied' });
+      gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
     });
   }
 
-  // Run immediately if DOM is ready, otherwise wait for it
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

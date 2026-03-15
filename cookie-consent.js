@@ -4,7 +4,7 @@
  * Usage (root pages):    <script src="cookie-consent.js"></script>
  * Usage (subfolders):    <script src="../cookie-consent.js"></script>
  *
- * Uses official Google Consent Mode API (gtag) instead of raw dataLayer push.
+ * Uses official Google Consent Mode API (gtag) + dataLayer.push for GTM trigger.
  * Requires this block BEFORE the GTM snippet on every page:
  *
  *   <script>
@@ -12,7 +12,9 @@
  *     function gtag(){dataLayer.push(arguments);}
  *     gtag('consent', 'default', {
  *       'analytics_storage': 'denied',
- *       'ad_storage': 'denied'
+ *       'ad_storage': 'denied',
+ *       'ad_user_data': 'denied',
+ *       'ad_personalization': 'denied'
  *     });
  *   </script>
  */
@@ -60,7 +62,6 @@
     const acceptBtn  = document.getElementById('accept-cookies');
     const declineBtn = document.getElementById('decline-cookies');
 
-    // Ensure gtag is available (fallback safety)
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
 
@@ -68,6 +69,7 @@
 
     if (savedConsent === 'granted') {
       gtag('consent', 'update', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
+      dataLayer.push({ 'event': 'consent_update' });
     } else if (savedConsent === 'denied') {
       gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
     } else {
@@ -78,6 +80,7 @@
       consentDiv.style.display = 'none';
       localStorage.setItem('cookieConsent', 'granted');
       gtag('consent', 'update', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
+      dataLayer.push({ 'event': 'consent_update' });
     });
 
     declineBtn.addEventListener('click', function () {

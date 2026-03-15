@@ -14,15 +14,15 @@
   <title>Rajiv Soochit | Digital Marketing & E-Commerce | Munich</title>
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Consent Mode default -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      'event': 'consent_default',
-      'ad_storage': 'denied',
-      'analytics_storage': 'denied'
-    });
-  </script>
+ <!-- Consent Mode default — BEFORE GTM -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied'
+  });
+</script>
 
   <!-- Google Tag Manager (head) -->
   <script>

@@ -1,26 +1,12 @@
 /**
  * cookie-consent.js
- * Shared cookie consent banner for all pages.
- * Usage (root pages):    <script src="cookie-consent.js"></script>
- * Usage (subfolders):    <script src="../cookie-consent.js"></script>
- *
- * Uses official Google Consent Mode API (gtag) + dataLayer.push for GTM trigger.
- * Requires this block BEFORE the GTM snippet on every page:
- *
- *   <script>
- *     window.dataLayer = window.dataLayer || [];
- *     function gtag(){dataLayer.push(arguments);}
- *     gtag('consent', 'default', {
- *       'analytics_storage': 'denied',
- *       'ad_storage': 'denied',
- *       'ad_user_data': 'denied',
- *       'ad_personalization': 'denied'
- *     });
- *   </script>
+ * Banner per consenso cookie compatibile con GTM e GA4.
+ * Posizionare questo script DOPO il GTM snippet.
  */
 
 (function () {
   function init() {
+    // Inserisci il banner nel body
     document.body.insertAdjacentHTML('beforeend', `
       <div id="cookie-consent" style="
         display:none;
@@ -62,31 +48,32 @@
     const acceptBtn  = document.getElementById('accept-cookies');
     const declineBtn = document.getElementById('decline-cookies');
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-
     const savedConsent = localStorage.getItem('cookieConsent');
 
+    // Se già salvato, aggiorna il consenso subito
     if (savedConsent === 'granted') {
-      gtag('consent', 'update', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
-      dataLayer.push({ 'event': 'consent_update' });
+      gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'granted' });
+      dataLayer.push({ event: 'consent_update' });
     } else if (savedConsent === 'denied') {
-      gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
+      gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied' });
     } else {
+      // Mostra il banner agli utenti nuovi
       consentDiv.style.display = 'block';
     }
 
+    // Accetta cookies
     acceptBtn.addEventListener('click', function () {
       consentDiv.style.display = 'none';
       localStorage.setItem('cookieConsent', 'granted');
-      gtag('consent', 'update', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
-      dataLayer.push({ 'event': 'consent_update' });
+      gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'granted' });
+      dataLayer.push({ event: 'consent_update' });
     });
 
+    // Rifiuta cookies
     declineBtn.addEventListener('click', function () {
       consentDiv.style.display = 'none';
       localStorage.setItem('cookieConsent', 'denied');
-      gtag('consent', 'update', { 'analytics_storage': 'denied', 'ad_storage': 'denied' });
+      gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied' });
     });
   }
 
@@ -95,5 +82,4 @@
   } else {
     init();
   }
-
 })();

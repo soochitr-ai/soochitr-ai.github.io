@@ -1,10 +1,16 @@
 /**
  * cookie-consent.js
- * Banner per consenso cookie compatibile con GTM e GA4.
- * Posizionare questo script DOPO il GTM snippet.
+ * Banner per consenso cookie compatibile con GTM / GA4.
+ * Posizionare questo script DOPO il GTM snippet (idealmente prima di </body>).
  */
 
 (function () {
+  function safeGtag() {
+    if (typeof gtag === 'function') return gtag;
+    return function(){ window.dataLayer = window.dataLayer || []; window.dataLayer.push(arguments); };
+  }
+  var g = safeGtag();
+
   function init() {
     // Inserisci il banner nel body
     document.body.insertAdjacentHTML('beforeend', `
@@ -50,30 +56,56 @@
 
     const savedConsent = localStorage.getItem('cookieConsent');
 
-    // Se già salvato, aggiorna il consenso subito
+    // Se già salvato, aggiorna il consenso subito (con tutti i flags)
     if (savedConsent === 'granted') {
-      gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'granted' });
-      dataLayer.push({ event: 'consent_update' });
+      g('consent', 'update', {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'consent_update' });
     } else if (savedConsent === 'denied') {
-      gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied' });
+      g('consent', 'update', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'consent_update' });
     } else {
       // Mostra il banner agli utenti nuovi
       consentDiv.style.display = 'block';
     }
 
-    // Accetta cookies
+    // Accetta cookies (abilita tutti i segnali)
     acceptBtn.addEventListener('click', function () {
       consentDiv.style.display = 'none';
       localStorage.setItem('cookieConsent', 'granted');
-      gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'granted' });
-      dataLayer.push({ event: 'consent_update' });
+      g('consent', 'update', {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'consent_update' });
     });
 
-    // Rifiuta cookies
+    // Rifiuta cookies (tutti denied, ma GA4 rimane configurata anonima pre-consenso)
     declineBtn.addEventListener('click', function () {
       consentDiv.style.display = 'none';
       localStorage.setItem('cookieConsent', 'denied');
-      gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied' });
+      g('consent', 'update', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'consent_update' });
     });
   }
 

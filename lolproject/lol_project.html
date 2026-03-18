@@ -14,7 +14,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
 
-  // 1) Default consent (privacy-first)
   gtag('consent', 'default', {
     'analytics_storage': 'denied',
     'ad_storage': 'denied',
@@ -22,8 +21,6 @@
     'ad_personalization': 'denied'
   });
 
-  // 2) GA4 config **anonima** — permette segnali aggregati pre-consenso
-  // Sostituisci G-RP9MX5E2LV solo se cambi ID GA4
   gtag('js', new Date());
   gtag('config', 'G-RP9MX5E2LV', {
     'anonymize_ip': true,
@@ -43,7 +40,7 @@
   <!-- Lightbox -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-<script src="../cookie-consent.js"></script></head>
+</head>
 <body>
 
   <!-- Google Tag Manager (noscript) -->
@@ -346,6 +343,6 @@
       and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
     </p>
   </footer>
-
+<script src="../cookie-consent.js"></script>
 </body>
 </html>

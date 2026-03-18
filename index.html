@@ -9,28 +9,23 @@
   <link rel="stylesheet" href="styles.css" />
 
   <!-- ---------- Consent Mode DEFAULT (must be BEFORE GTM) ---------- -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
 
-    // Consent Mode default: denied (privacy-first)
-    gtag('consent', 'default', {
-      'analytics_storage': 'denied',
-      'ad_storage': 'denied',
-      'ad_user_data': 'denied',
-      'ad_personalization': 'denied'
-    });
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
 
-    // GA4 configuration (anonymized). This pushes config to dataLayer
-    // so GTM/gtag will pick it up once GTM loads.
-    // Replace the ID below only if you want to change it.
-    gtag('js', new Date());
-    gtag('config', 'G-RP9MX5E2LV', {
-      'anonymize_ip': true,
-      'allow_ad_personalization_signals': false
-      // note: do NOT enable ad personalization pre-consent
-    });
-  </script>
+  gtag('js', new Date());
+  gtag('config', 'G-RP9MX5E2LV', {
+    'anonymize_ip': true,
+    'allow_ad_personalization_signals': false
+  });
+</script>
 
   <!-- ---------- Google Tag Manager (Head) ---------- -->
   <script>

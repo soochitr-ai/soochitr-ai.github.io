@@ -1,90 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rajiv Soochit – Junior Digital Marketing & E-Commerce Specialist based in Munich. Expert in SEO, Tracking, CRM, and Performance/Analytics. Open to remote roles.">
-  <link rel="canonical" href="https://soochitr-ai.github.io/">
-  <!-- Open Graph -->
-  <meta property="og:title" content="Rajiv Soochit | Digital Marketing & E-Commerce Specialist">
-  <meta property="og:description" content="SEO, Analytics, CRM, Tracking & Performance Marketing specialist based in Munich.">
-  <meta property="og:image" content="https://soochitr-ai.github.io/Bewerbungsphoto.jpg">
-  <meta property="og:url" content="https://soochitr-ai.github.io/">
-  <meta property="og:type" content="website">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rajiv Soochit – Junior Digital Marketing & E-Commerce Specialist based in Munich. Expert in SEO, Tracking, CRM, and Performance/Analytics. Open to remote roles." />
+  <link rel="canonical" href="https://soochitr-ai.github.io/" />
   <title>Rajiv Soochit | Digital Marketing & E-Commerce | Munich</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 
- <!-- Consent Mode default — BEFORE GTM -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    'analytics_storage': 'denied',
-    'ad_storage': 'denied',
-    'ad_user_data': 'denied',
-    'ad_personalization': 'denied'
-  });
-</script>
-
-  <!-- Google Tag Manager (head) -->
+  <!-- ---------- Consent Mode DEFAULT (must be BEFORE GTM) ---------- -->
   <script>
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-W64ZK2GH');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    // Consent Mode default: denied (privacy-first)
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
+    });
+
+    // GA4 configuration (anonymized). This pushes config to dataLayer
+    // so GTM/gtag will pick it up once GTM loads.
+    // Replace the ID below only if you want to change it.
+    gtag('js', new Date());
+    gtag('config', 'G-RP9MX5E2LV', {
+      'anonymize_ip': true,
+      'allow_ad_personalization_signals': false
+      // note: do NOT enable ad personalization pre-consent
+    });
   </script>
 
- <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Rajiv Soochit",
-  "image": "https://soochitr-ai.github.io/Bewerbungsphoto.jpg",
-  "url": "https://soochitr-ai.github.io/",
-  "jobTitle": "Junior Digital Marketing & E-Commerce Specialist",
-  "description": "Junior Digital Marketing & E-Commerce Specialist based in Munich. Specialized in SEO, GA4, CRM, Tracking, Analytics, SQL, and Performance Marketing.",
-  "email": "soochitr@gmail.com",
-  "knowsAbout": [
-    "SEO",
-    "Google Analytics 4",
-    "Salesforce",
-    "HubSpot",
-    "E-Commerce",
-    "SQL",
-    "Performance Marketing",
-    "Tracking & Analytics",
-    "Marketing Automation",
-    "Shopify",
-    "Data Analytics"
-  ],
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Self-employed"
-  },
-  "sameAs": [
-    "https://www.linkedin.com/in/rajiv-soochit/"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Munich",
-    "addressCountry": "DE"
+  <!-- ---------- Google Tag Manager (Head) ---------- -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W64ZK2GH');
+  </script>
+
+  <!-- JSON-LD schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rajiv Soochit",
+    "image": "https://soochitr-ai.github.io/Bewerbungsphoto.jpg",
+    "url": "https://soochitr-ai.github.io/",
+    "jobTitle": "Junior Digital Marketing & E-Commerce Specialist",
+    "description": "Junior Digital Marketing & E-Commerce Specialist based in Munich. Specialized in SEO, GA4, CRM, Tracking, Analytics, SQL, and Performance Marketing.",
+    "email": "soochitr@gmail.com",
+    "knowsAbout": ["SEO","Google Analytics 4","Salesforce","HubSpot","E-Commerce","SQL","Performance Marketing","Tracking & Analytics","Marketing Automation","Shopify","Data Analytics"],
+    "worksFor": {"@type":"Organization","name":"Self-employed"},
+    "sameAs":["https://www.linkedin.com/in/rajiv-soochit/"],
+    "address":{"@type":"PostalAddress","addressLocality":"Munich","addressCountry":"DE"}
   }
-}
-</script>
+  </script>
 </head>
 <body>
 
-  <!-- Google Tag Manager (noscript) -->
+  <!-- GTM noscript iframe (keep immediately after body open) -->
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W64ZK2GH"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
 
-  <!-- Menu button -->
+  <!-- ======= Your page content (kept as before) ======= -->
   <button id="menu-btn">☰</button>
 
-  <!-- Side menu -->
   <nav id="side-menu">
     <ul>
       <li><a href="https://skillshop.credential.net/5a25d8d5-98c3-4024-b085-c22ef3c3a597#acc.klwXAyRx" target="_blank">Google Analytics Certification</a></li>
@@ -98,20 +83,17 @@
     </ul>
   </nav>
 
-  <!-- Header -->
   <header>
     <h1>Rajiv Soochit – Junior Digital Marketing & E-Commerce Specialist</h1>
     <p>Specialized in SEO, GA4, CRM, Performance Marketing & Web/Data Analytics</p>
     <img src="Bewerbungsphoto.jpg" alt="Rajiv Soochit – Junior Digital Marketing & E-Commerce Specialist in Munich" style="width:200px;height:200px;border-radius:50%;object-fit:cover;">
   </header>
 
-  <!-- About -->
   <section id="about">
     <h2>About Me – Digital Marketing Specialist in Munich</h2>
-    <p>Born/raised in Italy, Mauritian background, living in Germany since 2019. Career started in Sales (EDEKA & Decathlon) and moved into MarTech, E-Commerce, Analytics, Automation and basic Front-End. Comfortable with Salesforce, GA4, SQL, Excel, and more. Open for offers and questions via LinkedIn.</p>
+    <p>Born/raised in Italy, Mauritian background, living in Germany since 2019. Career started in Sales (EDEKA & Decathlon) and moved into MarTech, E-Commerce, Analytics, Automation and basic Front-End. Comfortable with Salesforce, GA4, SQL, and more. Open for offers and questions via LinkedIn.</p>
   </section>
 
-  <!-- Skills -->
   <section id="skills">
     <h2>Digital Marketing, Analytics, Performance & E-Commerce Skills</h2>
     <ul>
@@ -127,37 +109,18 @@
 
   <section id="featured">
     <h2>Featured Project - More incoming!</h2>
-    <a href="lolproject/lol_project.html"
-       style="display: inline-block;
-              padding: 15px 30px;
-              font-size: 1.4rem;
-              background: #4CAF50;
-              color: white;
-              text-decoration: none;
-              border-radius: 8px;
-              text-align: center;">
-     How Marketing and Gaming Data can be used for Prediction and Behaviour Analysis
+    <a href="lolproject/lol_project.html" style="display:inline-block;padding:15px 30px;font-size:1.4rem;background:#4CAF50;color:white;text-decoration:none;border-radius:8px;text-align:center;">
+      How Marketing and Gaming Data can be used for Prediction and Behaviour Analysis
     </a>
-    <a href="job_project/jobsearch_project.html"
-   style="display: inline-block;
-          padding: 15px 30px;
-          font-size: 1.4rem;
-          background: #336666;
-          color: white;
-          text-decoration: none;
-          border-radius: 8px;
-          text-align: center;
-          margin-top: 12px;">
-  Job Search Analysis — 321 Applications as an Ongoing Student, Data-Driven Insights
-</a>
+    <a href="job_project/jobsearch_project.html" style="display:inline-block;padding:15px 30px;font-size:1.4rem;background:#336666;color:white;text-decoration:none;border-radius:8px;text-align:center;margin-top:12px;">
+      Job Search Analysis — 321 Applications as an Ongoing Student, Data-Driven Insights
+    </a>
   </section>
 
-  <!-- Contact -->
   <section id="contact">
     <h2>Contact Me – Open to Marketing Roles in Munich!</h2>
 
     <form action="https://formspree.io/f/mgolqanb" method="POST">
-      <!-- Honeypot anti-bot -->
       <input type="text" name="_honey" style="display:none">
       <input type="hidden" name="_next" value="thankyou.html">
 
@@ -177,12 +140,10 @@
     </form>
 
     <p style="margin-top:15px;">
-      Or connect via
-      <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank">LinkedIn</a>
+      Or connect via <a href="https://www.linkedin.com/in/rajiv-soochit/" target="_blank">LinkedIn</a>
     </p>
   </section>
 
-  <!-- Certificates -->
   <section id="certificates">
     <h2>Marketing & Tech Certifications</h2>
     <ul>
@@ -190,14 +151,9 @@
       <li><a href="https://www.udemy.com/certificate/UC-4787bd58-f80a-422b-a187-7dc4196a472f/" target="_blank">Basic SEO</a></li>
       <li><a href="https://www.udemy.com/certificate/UC-d96e5d1c-73f9-4b13-8557-24f9255f8aa3/" target="_blank">SAP Basics</a></li>
       <li><a href="https://www.udemy.com/certificate/UC-0599eeed-df57-4ca6-95ae-421d0daf004a/" target="_blank">Build a Shopify Store</a></li>
-      <li><a href="https://www.udemy.com/certificate/UC-ed620f84-73f7-4a06-976e-20fff8a00d38/" target="_blank">Excel Basics</a></li>
-      <li><a href="https://www.udemy.com/certificate/UC-38e907c6-ba07-429c-a4a8-2c4d1df02437/" target="_blank">Dynamic Excel Reports</a></li>
-      <li><a href="https://www.udemy.com/certificate/UC-a0614c7b-c0b3-463c-b008-91d18b0e8218/" target="_blank">MySQL for Beginners</a></li>
-      <li><a href="https://www.udemy.com/certificate/UC-483bdfe8-5025-4c65-aed4-aa6938a7f882/" target="_blank">WordPress Crash Course</a></li>
     </ul>
   </section>
 
-  <!-- Footer -->
   <footer style="margin-top:40px;text-align:center;">
     <p>
       <a href="datenschutz.html">Datenschutz</a> |
@@ -206,8 +162,10 @@
     </p>
   </footer>
 
-  <!-- Cookie consent (shared) + Side menu toggle -->
+  <!-- ---------- Cookie consent script (handles accept/decline and calls gtag('consent','update')) ---------- -->
   <script src="cookie-consent.js"></script>
+
+  <!-- Side menu toggle -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const menuBtn = document.getElementById('menu-btn');

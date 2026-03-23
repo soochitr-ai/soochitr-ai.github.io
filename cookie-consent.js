@@ -28,7 +28,7 @@
         font-family:inherit;
         font-size:0.95rem;
       ">
-        This site uses cookies for analytics purposes.
+        This site uses cookies to analyse traffic — the data helps me improve my portfolio projects and understand how visitors interact with the content.
         <button id="accept-cookies" style="
           margin-left:10px;
           padding:5px 14px;

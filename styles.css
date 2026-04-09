@@ -79,7 +79,8 @@ header {
 }
 
 #side-menu ul li {
-  margin: 1rem 0;
+margin: 1rem auto;
+max-width: 800px; /* opzionale ma meglio esplicito */
 }
 
 #side-menu ul li a {
